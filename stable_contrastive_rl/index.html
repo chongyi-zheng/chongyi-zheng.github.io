@@ -14,7 +14,7 @@ In the same way that the computer vision (CV) and natural language processing (N
 Evaluation on Simulated Manipulation Tasks
 ===============================================================================
 
-Below, we visualize examples of the behavior learned by stable contrastive RL and baselines, GC-IQL and GCBC, on simulated manipulation tasks. The images shown on the top are examples of the initial observation and goal. Note that our method casts reinforcement learning as a self-supervised problem, without using any reward function and successfully solving multi-stage goal-conditioned tasks.
+Below, we visualize examples of the behavior learned by stable contrastive RL and baselines, GC-IQL and GCBC, on simulated manipulation tasks. The images shown on the top are examples of the initial observation and the goal. Note that our method casts reinforcement learning as a self-supervised problem, without using any reward function and successfully solving multi-stage goal-conditioned control tasks.
 
 **TASK:** Close the drawer.
 
@@ -22,19 +22,19 @@ Below, we visualize examples of the behavior learned by stable contrastive RL an
 
 ![GC-IQL](videos/iql_drawer.mp4 width="225") ![GCBC](videos/gcbc_drawer.mp4 width="225") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_drawer.mp4 width="225")
 
-**TASK:** Pick and place the object from the table.
+**TASK:** Pick the green object on the table and place it in the tray.
 
 ![Initial Observation](images/init_obs_pick_and_place_table.png width="225") ![Goal](images/goal_pick_and_place_table.png width="225") 
 
 ![GC-IQL](videos/iql_pick_and_place_table.mp4 width="225") ![GCBC](videos/gcbc_pick_and_place_table.mp4 width="225") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_pick_and_place_table.mp4 width="225")
 
-**TASK:** Pick and place the object and close the drawer.
+**TASK:** Pick the green object in the drawer, place it in the tray, and then close the drawer.
 
 ![Initial Observation](images/init_obs_pick_and_place_drawer.png width="225") ![Goal](images/goal_pick_and_place_drawer.png width="225")
 
 ![GC-IQL](videos/iql_pick_and_place_drawer.mp4 width="225") ![GCBC](videos/gcbc_pick_and_place_drawer.mp4 width="225") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_pick_and_place_drawer.mp4 width="225")
 
-**TASK:** Push block and open the drawer.
+**TASK:** Push the orange block on the table and then open the drawer.
 
 ![Initial Observation](images/init_obs_push_block_open_drawer.png width="225") ![Goal](images/goal_push_block_open_drawer.png width="225")
 
@@ -45,7 +45,7 @@ Failure Cases
 
 For the task below, the agent tries to push the orange block, but fails to close the drawer.
 
-**TASK:** Push block and close the drawer.
+**TASK:** Push the orange block on the table and then close the drawer.
 
 ![Initial Observation](images/init_obs_push_block_close_drawer.png width="225") ![Goal](images/goal_push_block_close_drawer.png width="225") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_push_block_close_drawer.mp4 width="225")
 
@@ -54,19 +54,19 @@ Evaluation on Real Manipulation Tasks
 
 We also show examples of the behavior learned by stable contrastive RL and the same baselines on real manipulation tasks. All the methods successfully solves the simplest tasks "reach the eggplant", while stable contrastive RL achives 60% success rates on the other two tasks where baselines fail.
 
-**TASK:** Reach the eggplant.
+**TASK:** Reach the eggplant on the table.
 
 ![Initial Observation](images/init_obs_reach_eggplant.jpg width="225") ![Goal](images/goal_reach_eggplant.jpg width="225")
 
 ![GC-IQL](videos/iql_reach_eggplant.mp4 width="225") ![GCBC](videos/gcbc_reach_eggplant.mp4 width="225") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_reach_eggplant.mp4 width="225")
 
-**TASK:** Pick and place the spoon.
+**TASK:** Pick the red spoon and place it on the left of the pot.
 
 ![Initial Observation](images/init_obs_pick_and_place_spoon.jpg width="225") ![Goal](images/goal_pick_and_place_spoon.jpg width="225") 
 
 ![GC-IQL](videos/iql_pick_and_place_spoon.mp4 width="225") ![GCBC](videos/gcbc_pick_and_place_spoon.mp4 width="225") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_pick_and_place_spoon.mp4 width="225")
 
-**TASK:** Push the can.
+**TASK:** Push the can to the wall.
 
 ![Initial Observation](images/init_obs_push_can.jpg width="225") ![Goal](images/goal_push_can.jpg width="225")
 
