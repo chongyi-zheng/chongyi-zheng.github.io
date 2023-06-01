@@ -16,12 +16,6 @@ Evaluation on Real Manipulation Tasks
 
 Below, we show examples of the behavior learned by stable contrastive RL and baselines, GC-IQL and GCBC, on the real manipulation tasks. All the methods successfully solves the simplest tasks "reach the eggplant", while stable contrastive RL achives 60% success rates on the other two tasks where baselines fail. Note that our method casts reinforcement learning as a self-supervised problem, without using any reward function and successfully solving multi-stage goal-conditioned control tasks.
 
-**TASK:** Reach the eggplant on the table.
-
-![Goal](images/goal_reach_eggplant.jpg width="350") ![GC-IQL](videos/iql_reach_eggplant.mp4 width="350") 
-
-![GCBC](videos/gcbc_reach_eggplant.mp4 width="350") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_reach_eggplant.mp4 width="350")
-
 **TASK:** Pick the red spoon and place it on the left of the pot.
 
 ![Goal](images/goal_pick_and_place_spoon.jpg width="350") ![GC-IQL](videos/iql_pick_and_place_spoon.mp4 width="350")
@@ -34,22 +28,16 @@ Below, we show examples of the behavior learned by stable contrastive RL and bas
 
 ![GCBC](videos/gcbc_push_can.mp4 width="350") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_push_can.mp4 width="350")
 
+**TASK:** Reach the eggplant on the table.
+
+![Goal](images/goal_reach_eggplant.jpg width="350") ![GC-IQL](videos/iql_reach_eggplant.mp4 width="350") 
+
+![GCBC](videos/gcbc_reach_eggplant.mp4 width="350") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_reach_eggplant.mp4 width="350")
+
 Evaluation on Simulated Manipulation Tasks
 ===============================================================================
 
 We also visualize examples of the behavior learned by stable contrastive RL and the same baselines on the simulated manipulation tasks. Stable contrastive RL is able to solve multi-stage goal-conditioned control tasks, while baselines complete single stage or fail to complete the tasks.
-
-**TASK:** Close the drawer.
-
-![Goal](images/goal_drawer.png width="350") ![GC-IQL](videos/iql_drawer.mp4 width="350") 
-
-![GCBC](videos/gcbc_drawer.mp4 width="350") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_drawer.mp4 width="350")
-
-**TASK:** Pick the green object on the table and place it in the tray.
-
-![Goal](images/goal_pick_and_place_table.png width="350") ![GC-IQL](videos/iql_pick_and_place_table.mp4 width="350") 
-
-![GCBC](videos/gcbc_pick_and_place_table.mp4 width="350") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_pick_and_place_table.mp4 width="350")
 
 **TASK:** Pick the green object in the drawer, place it in the tray, and then close the drawer.
 
@@ -62,6 +50,18 @@ We also visualize examples of the behavior learned by stable contrastive RL and 
 ![Goal](images/goal_push_block_open_drawer.png width="350") ![GC-IQL](videos/iql_push_block_open_drawer.mp4 width="350") 
 
 ![GCBC](videos/gcbc_push_block_open_drawer.mp4 width="350") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_push_block_open_drawer.mp4 width="350")
+
+**TASK:** Pick the green object on the table and place it in the tray.
+
+![Goal](images/goal_pick_and_place_table.png width="350") ![GC-IQL](videos/iql_pick_and_place_table.mp4 width="350") 
+
+![GCBC](videos/gcbc_pick_and_place_table.mp4 width="350") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_pick_and_place_table.mp4 width="350")
+
+**TASK:** Close the drawer.
+
+![Goal](images/goal_drawer.png width="350") ![GC-IQL](videos/iql_drawer.mp4 width="350") 
+
+![GCBC](videos/gcbc_drawer.mp4 width="350") ![Stable Contrastive RL (Ours)](videos/stable_contrastive_rl_drawer.mp4 width="350")
 
 Failure Cases
 -------------------------------------------------------------------------------
