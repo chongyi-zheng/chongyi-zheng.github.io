@@ -29,9 +29,9 @@ layout: default
               alt=page.profile.image
               cache_bust=true -%}
             {% endif -%}
-            {%- if page.profile.more_info %}
-            <div class="more-info">
-              {{ page.profile.more_info }}
+            {%- if page.profile.email %}
+            <div class="email">
+              {{ site.email | email_protect }}
             </div>
             {%- endif %}
           </div>

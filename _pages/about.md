@@ -8,10 +8,7 @@ profile:
   align: right
   image: prof_pic.jpeg
   image_circular: true # crops the image to make it circular
-  # more_info: # >
-  #   # <p>555 your office number</p>
-  #   # <p>123 your address street</p>
-  #   # <p>Your City, State 12345</p>
+  email: true
 
 news: false  # includes a list of news items
 preprints: false # includes a list of preprints maked as "preprint={true}"
