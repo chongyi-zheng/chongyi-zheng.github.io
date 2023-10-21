@@ -27,16 +27,16 @@ Below, we show examples of the behavior learned by stable contrastive RL and bas
         {% include figure.html path="../assets/papers/stable_contrastive_rl/images/goal_pick_and_place_spoon.jpg" class="img-fluid rounded z-depth-1" caption="Goal" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_pick_and_place_spoon.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GC-IQL" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_pick_and_place_spoon.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GC-IQL" %}
     </div>
 </div>
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_pick_and_place_spoon.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GCBC" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_pick_and_place_spoon.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GCBC" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_pick_and_place_spoon.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="Stable Contrastive RL (Ours)" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_pick_and_place_spoon.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Stable Contrastive RL (Ours)" %}
     </div>
 </div>
 
@@ -47,16 +47,16 @@ Below, we show examples of the behavior learned by stable contrastive RL and bas
         {% include figure.html path="../assets/papers/stable_contrastive_rl/images/goal_push_can.jpg" class="img-fluid rounded z-depth-1" caption="Goal" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_push_can.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GC-IQL" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_push_can.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GC-IQL" %}
     </div>
 </div>
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_push_can.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GCBC" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_push_can.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GCBC" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_push_can.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="Stable Contrastive RL (Ours)" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_push_can.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Stable Contrastive RL (Ours)" %}
     </div>
 </div>
 
@@ -67,16 +67,16 @@ Below, we show examples of the behavior learned by stable contrastive RL and bas
         {% include figure.html path="../assets/papers/stable_contrastive_rl/images/goal_reach_eggplant.jpg" class="img-fluid rounded z-depth-1" caption="Goal" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_reach_eggplant.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GC-IQL" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_reach_eggplant.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GC-IQL" %}
     </div>
 </div>
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_reach_eggplant.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GCBC" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_reach_eggplant.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GCBC" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_reach_eggplant.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="Stable Contrastive RL (Ours)" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_reach_eggplant.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Stable Contrastive RL (Ours)" %}
     </div>
 </div>
 
@@ -91,16 +91,16 @@ We also visualize examples of the behavior learned by stable contrastive RL and 
         {% include figure.html path="../assets/papers/stable_contrastive_rl/images/goal_pick_and_place_drawer.png" class="img-fluid rounded z-depth-1" caption="Goal" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_pick_and_place_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GC-IQL" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_pick_and_place_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GC-IQL" %}
     </div>
 </div>
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_pick_and_place_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GCBC" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_pick_and_place_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GCBC" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_pick_and_place_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="Stable Contrastive RL (Ours)" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_pick_and_place_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Stable Contrastive RL (Ours)" %}
     </div>
 </div>
 
@@ -111,16 +111,16 @@ We also visualize examples of the behavior learned by stable contrastive RL and 
         {% include figure.html path="../assets/papers/stable_contrastive_rl/images/goal_push_block_open_drawer.png" class="img-fluid rounded z-depth-1" caption="Goal" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_push_block_open_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GC-IQL" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_push_block_open_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GC-IQL" %}
     </div>
 </div>
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_push_block_open_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GCBC" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_push_block_open_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GCBC" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_push_block_open_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="Stable Contrastive RL (Ours)" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_push_block_open_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Stable Contrastive RL (Ours)" %}
     </div>
 </div>
 
@@ -131,16 +131,16 @@ We also visualize examples of the behavior learned by stable contrastive RL and 
         {% include figure.html path="../assets/papers/stable_contrastive_rl/images/goal_pick_and_place_table.png" class="img-fluid rounded z-depth-1" caption="Goal" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_pick_and_place_table.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GC-IQL" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_pick_and_place_table.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GC-IQL" %}
     </div>
 </div>
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_pick_and_place_table.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GCBC" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_pick_and_place_table.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GCBC" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_pick_and_place_table.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="Stable Contrastive RL (Ours)" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_pick_and_place_table.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Stable Contrastive RL (Ours)" %}
     </div>
 </div>
 
@@ -151,16 +151,16 @@ We also visualize examples of the behavior learned by stable contrastive RL and 
         {% include figure.html path="../assets/papers/stable_contrastive_rl/images/goal_drawer.png" class="img-fluid rounded z-depth-1" caption="Goal" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GC-IQL" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/iql_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GC-IQL" %}
     </div>
 </div>
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="GCBC" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/gcbc_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="GCBC" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="Stable Contrastive RL (Ours)" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Stable Contrastive RL (Ours)" %}
     </div>
 </div>
 
@@ -175,6 +175,6 @@ For the task below, the agent tries to push the orange block, but fails to close
         {% include figure.html path="../assets/papers/stable_contrastive_rl/images/goal_push_block_close_drawer.png" class="img-fluid rounded z-depth-1" caption="Goal" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_push_block_close_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true caption="Stable Contrastive RL (Ours)" %}
+        {% include video.html path="../assets/papers/stable_contrastive_rl/videos/stable_contrastive_rl_push_block_close_drawer.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Stable Contrastive RL (Ours)" %}
     </div>
 </div>
