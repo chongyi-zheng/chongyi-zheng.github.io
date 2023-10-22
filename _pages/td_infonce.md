@@ -25,7 +25,7 @@ Predicting and reasoning about the future lies at the heart of many time-series 
         {% include video.html path="../assets/papers/td_infonce/videos/td_infonce_reach.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="TD InfoNCE (Ours)" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/qrl_raech.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Quasimetric RL" %}
+        {% include video.html path="../assets/papers/td_infonce/videos/qrl_reach.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Quasimetric RL" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
         {% include video.html path="../assets/papers/td_infonce/videos/contrastive_rl_reach.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Contrastive RL" %}
