@@ -10,6 +10,7 @@ nav_order: 1
 <p><center><b><a href="" style="font-size: 20px">Paper</a>, &emsp; <a href="https://github.com/chongyi-zheng/td_infonce" style="font-size: 20px">Code</a></b></center></p>
 
 <p align="center">
+<br>
 <img src="../assets/papers/td_infonce/images/td_cpc.png" width="90%" />
 </p>
 
@@ -24,13 +25,7 @@ Below, we show examples of TD InfoNCE solving state-based manipulation tasks in 
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/td_infonce_reach.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="TD InfoNCE (Ours)" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/qrl_reach.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Quasimetric RL" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/contrastive_rl_reach.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Contrastive RL" %}
+        {% include video.html path="../assets/papers/td_infonce/videos/reach.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true %}
     </div>
 </div>
 
@@ -38,13 +33,7 @@ Below, we show examples of TD InfoNCE solving state-based manipulation tasks in 
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/td_infonce_push.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="TD InfoNCE (Ours)" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/qrl_push.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Quasimetric RL" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/contrastive_rl_push.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Contrastive RL" %}
+        {% include video.html path="../assets/papers/td_infonce/videos/push.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true %}
     </div>
 </div>
 
@@ -52,13 +41,7 @@ Below, we show examples of TD InfoNCE solving state-based manipulation tasks in 
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/td_infonce_pick_and_place.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="TD InfoNCE (Ours)" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/qrl_pick_and_place.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Quasimetric RL" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/contrastive_rl_pick_and_place.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Contrastive RL" %}
+        {% include video.html path="../assets/papers/td_infonce/videos/pick_and_place.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true %}
     </div>
 </div>
 
@@ -66,13 +49,7 @@ Below, we show examples of TD InfoNCE solving state-based manipulation tasks in 
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/td_infonce_slide.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="TD InfoNCE (Ours)" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/qrl_slide.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Quasimetric RL" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include video.html path="../assets/papers/td_infonce/videos/contrastive_rl_slide.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true caption="Contrastive RL" %}
+        {% include video.html path="../assets/papers/td_infonce/videos/slide.mp4" class="img-fluid rounded z-depth-1" controls=true autoplay=true loop=true %}
     </div>
 </div>
 

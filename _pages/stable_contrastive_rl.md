@@ -10,6 +10,7 @@ nav_order: 1
 <p><center><b><a href="https://arxiv.org/abs/2306.03346" style="font-size: 20px">Paper</a>, &emsp; <a href="https://github.com/chongyi-zheng/stable_contrastive_rl" style="font-size: 20px">Code</a></b></center></p>
 
 <p align="center">
+<br>
 <img src="../assets/papers/stable_contrastive_rl/images/arch_diagram.png" width="90%" />
 </p>
 
