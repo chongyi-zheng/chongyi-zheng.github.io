@@ -19,7 +19,7 @@ Predicting and reasoning about the future lies at the heart of many time-series 
 
 ### Evaluation on online GCRL benchmarks
 
-Below, we show examples of TD InfoNCE solving state-based manipulation tasks in the paper, comparing to prior methods quasimetric RL and contrastive RL. In each video, the desired goal (red point) is set to the same position.
+Below, we show examples of TD InfoNCE solving state-based manipulation tasks in the paper, comparing to prior methods quasimetric RL and contrastive RL. In each video, the desired goal (red point) is set to the same position and we use the color of the border to indicate failure (red) and success (green).
 
 **TASK:** reach
 
