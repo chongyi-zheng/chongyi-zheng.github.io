@@ -11,7 +11,7 @@ nav_order: 1
 
 <p align="center">
 <br>
-<img src="../assets/papers/td_infonce/images/td_cpc.png" width="90%" />
+<img src="../assets/papers/td_infonce/images/td_infonce.png" width="90%" />
 </p>
 
 *__Abstract__*:
