@@ -7,7 +7,7 @@ nav: false
 nav_order: 1
 ---
 <p><center><a href="https://chongyi-zheng.github.io/">Chongyi Zheng</a>, &emsp; <a href="https://www.cs.cmu.edu/~rsalakhu/">Ruslan Salakhutdinov</a>, &emsp; <a href="https://ben-eysenbach.github.io/">Benjamin Eysenbach</a></center></p>
-<p><center><b><a href="" style="font-size: 20px">Paper</a>, &emsp; <a href="https://github.com/chongyi-zheng/td_infonce" style="font-size: 20px">Code</a></b></center></p>
+<p><center><b><a href="https://arxiv.org/abs/2310.20141" style="font-size: 20px">Paper</a>, &emsp; <a href="https://github.com/chongyi-zheng/td_infonce" style="font-size: 20px">Code</a></b></center></p>
 
 <p align="center">
 <br>
