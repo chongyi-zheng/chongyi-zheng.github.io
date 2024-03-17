@@ -6,13 +6,13 @@ title: blank # the website title (if blank, full name will be used instead)
 first_name: Chongyi
 middle_name: 
 last_name: Zheng
-email: chongyiz@andrew.cmu.edu
+email: chongyiz@princeton.edu
 description: 
 footer_text: 
 keywords: 
 
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: cmu.svg  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: princeton.svg  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: chongyi-zheng.github.io # the base hostname & protocol for your site
 baseurl: # the subpath of your site, e.g. /blog/
