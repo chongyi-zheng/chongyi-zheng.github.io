@@ -3,8 +3,11 @@
   <script type="text/javascript">
     window.MathJax = {
       tex: {
-        tags: 'ams'
-      }
+        tags: 'ams',
+        macros: {
+          textsc: ['\\style{font-variant-caps: small-caps}{\\text{#1}}', 1]
+        }
+      },
     };
   </script>
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@{{ site.mathjax.version }}/es5/tex-mml-chtml.js"></script>

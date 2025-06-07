@@ -58,7 +58,7 @@ Below, we show examples of TD InfoNCE solving state-based manipulation tasks in 
 We evaluate TD InfoNCE on solving AntMaze tasks from the D4RL benchmark in the table below. TD InfoNCE outperforms most baselines on most tasks.
 
 <p align="center">
-    <img src="../assets/papers/td_infonce/images/offline_eval.png" width="100%" />
+    <img src="../assets/papers/td_infonce/images/offline_eval.png" width="25%" />
 </p>
 
 ### Off-policy reasoning
