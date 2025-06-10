@@ -177,7 +177,7 @@ __Comparison to prior intention encoding mechanisms__
     <img src="../assets/papers/infom/images/intention_encoding_ablation_lc.png" width="80%" />
 </p>
 
-Comparing to prior intention encoding mechanisms based on unsupervised skill discovery (HILP + FOM) or successor feature learning (FB + FOM), InFOM is a simple and performant way to infer user intentions.
+Compared with prior intention encoding mechanisms based on unsupervised skill discovery (HILP + FOM) or successor feature learning (FB + FOM), InFOM is a simple and performant way to infer user intentions.
 
 __Comparison to alternative policy extraction strategies__
 
