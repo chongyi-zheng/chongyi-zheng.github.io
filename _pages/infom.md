@@ -31,20 +31,26 @@ nav_order: 1
   <a href="https://github.com/chongyi-zheng/infom" style="font-size:20px;">Code</a>
 </div>
 
-<p align="center">
-<br>
-<img src="../assets/papers/infom/images/infom.png" width="90%" />
-</p>
+<div style="display:flex; justify-content:center; gap:1rem; margin:1.5em 0;">
+  <figure style="margin:0; text-align:center; flex:1;">
+    <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
+      <source src="../assets/papers/infom/videos/InFOM teaser cropped.mp4" type="video/mp4">
+      Your browser doesn’t support the video tag.
+    </video>
+  </figure>
+</div>
 
 ### Overview
 
-Intention-Conditioned Flow Occupancy Models (**InFOM**) is a latent variable model for pre-training and fine-tuning in reinforcement learning. *(Left)* The datasets are collected by users performing distinct tasks. *(Center)* We encode intentions by maximizing an evidence lower bound of data likelihood, *(Right)* enabling intention-aware future prediction using flow matching.
+While prior methods often learn a model that predicts the immediate next observation, we build a flow-matching model that predicts many steps into the future, conditioning on different user intentions. We call our method **intention-conditioned flow occupancy models (InFOM)**.
+
+*(Left)* The datasets are collected by users performing distinct tasks. *(Center)* We encode intentions by maximizing an evidence lower bound of data likelihood, *(Right)* enabling intention-aware future prediction using flow matching.
 
 
 ### Ideas
 
 __Pre-training__
-- Given *reward-free* pre-training datasets $$D$$ containing consecutive state-action pairs $$(s, a, s', a')$$ and a future state from the same trajectory $$s_f$$, we infer the latent intention $$z \in \mathcal{Z}$$ using the encoder $$p_e(z \mid s', a')$$ and predict the occupancy measures of the future state $$s_f$$ using the occupancy models $$q_d(s_f \mid s, a, z)$$. 
+- Given *reward-free* pre-training datasets $$D$$ containing consecutive state-action pairs $$(s, a, s', a')$$, we infer the latent intention $$z \in \mathcal{Z}$$ using the encoder $$p_e(z \mid s', a')$$ and predict the occupancy measures of the future state $$s_f$$ using the occupancy models $$q_d(s_f \mid s, a, z)$$. 
 
 - We maximize an evidence lower bound (ELBO) of the data likelihood to jointly optimize the encoder $$p_e(z \mid s', a')$$ and the decoder $$q_d(s_f \mid s, a, z)$$ using flow matching:
 
@@ -52,7 +58,7 @@ __Pre-training__
     \max_{p_e, q_d} \mathcal{L}_{\mathrm{Flow}}(q_d, p_e) + \lambda \mathbb{E}_{(s', a') \sim D} \left[ D_{\mathrm{KL}}( p_e(z \mid s', a') \parallel p(z) ) \right],
     $$
 
-    where $$p(z) = \mathcal{N}(0, I)$$ denotes an uninformative Gaussian prior.
+    where $$p(z) = \mathcal{N}(0, I)$$ is an uninformative Gaussian prior.
 
 - To predict future states across trajectories (dynamic programming), we adopt the SARSA variant of the TD flow loss [(Farebrother et al.)](https://arxiv.org/abs/2503.09817) to learn the vector field $$v_d: [0, 1] \times \mathcal{S} \times \mathcal{S} \times \mathcal{A} \times \mathcal{Z} \to \mathcal{S}$$ of our flow occupancy models:
 
@@ -71,7 +77,7 @@ __Fine-tuning__
   \hat{Q}(s, a, z) = \frac{1}{(1 - \gamma) N} \sum_{i = 1}^N r \left( s_f^{(i)} \right), \, s_f^{(i)} \sim q_d(s_f \mid s, a, z), \forall \: (s, a) \in D_{\text{reward}}, \: z \in \mathcal{Z}
   $$
 
-- We utilize an implicit generalized policy improvement procedure to extract a policy.
+- We then utilize an implicit generalized policy improvement procedure to extract a policy.
 
     $$
     \begin{align*}
@@ -146,7 +152,9 @@ __Fine-tuning__
   </figure>
 </div>
 
-We select four domains from the [ExORL](https://arxiv.org/abs/2201.13425) benchmarks: $$\texttt{cheetah}$$, $$\texttt{walker}$$, $$\texttt{quadruped}$$, $$\texttt{jaco}$$, including 16 state-based tasks, and four domains from the [OGBench](https://arxiv.org/abs/2410.20092) benchmarks: $$\texttt{cube single}$$, $$\texttt{cube double}$$, $$\texttt{scene}$$, $$\texttt{puzzle 4x4}$$, including 20 state-based tasks and 4 image-based tasks, to evaluate our algorithms.
+- Four domains from the [ExORL](https://arxiv.org/abs/2201.13425) benchmarks: $$\texttt{cheetah}$$, $$\texttt{walker}$$, $$\texttt{quadruped}$$, $$\texttt{jaco}$$, including 16 state-based tasks.
+
+- Four domains from the [OGBench](https://arxiv.org/abs/2410.20092) benchmarks: $$\texttt{cube single}$$, $$\texttt{cube double}$$, $$\texttt{scene}$$, $$\texttt{puzzle 4x4}$$, including 20 state-based tasks and 4 image-based tasks, to evaluate our algorithms.
 
 ### Evaluation on ExORL and OGBench tasks
 
@@ -159,7 +167,7 @@ We select four domains from the [ExORL](https://arxiv.org/abs/2201.13425) benchm
 
 - We conjecture that the baselines fail on these more challenging OGBench tasks because of the *semi-sparse* reward functions.
 
-- InFOM learn an expressive generative model along with the GPI-like policy extraction strategy to better exploit the high-reward region of the state space.
+- InFOM learns an expressive generative model along with the GPI-like policy extraction strategy to better exploit the high-reward region of the state space.
 
 ### Ablation study
 
