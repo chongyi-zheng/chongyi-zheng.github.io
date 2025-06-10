@@ -34,7 +34,7 @@ nav_order: 1
 <div style="display:flex; justify-content:center; gap:1rem; margin:1.5em 0;">
   <figure style="margin:0; text-align:center; flex:1;">
     <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
-      <source src="../assets/papers/infom/videos/InFOM teaser cropped.mp4" type="video/mp4">
+      <source src="../assets/papers/infom/videos/InFOM teaser v2.mp4" type="video/mp4">
       Your browser doesn’t support the video tag.
     </video>
   </figure>
