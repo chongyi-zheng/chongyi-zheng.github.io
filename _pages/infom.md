@@ -27,7 +27,7 @@ nav_order: 1
 </div>
 
 <div style="text-align:center; margin-top:0.75em;">
-  <a href="" style="font-size:20px;">Paper</a>&emsp;
+  <a href="https://arxiv.org/abs/2506.08902" style="font-size:20px;">Paper</a>&emsp;
   <a href="https://github.com/chongyi-zheng/infom" style="font-size:20px;">Code</a>
 </div>
 
