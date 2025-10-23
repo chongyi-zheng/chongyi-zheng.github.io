@@ -11,7 +11,7 @@ profile:
   email: true
 
 news: false  # includes a list of news items
-preprints: true # includes a list of preprints maked as "preprint={true}"
+preprints: false # includes a list of preprints maked as "preprint={true}"
 publications: true # includes a list of papers marked as "publication={true}"
 social: false  # includes social icons at the bottom of the page
 ---
