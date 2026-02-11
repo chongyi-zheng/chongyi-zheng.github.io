@@ -1,0 +1,681 @@
+---
+layout: page
+permalink: /onestep-fb/
+title: Can We Really Learn One Representation to Optimize All Rewards?
+description: 
+nav: false
+nav_order: 1
+hide_title: true
+---
+
+<style>
+  /* Remove the extra whitespace above the site navbar */
+  /* body { padding-top: 0 !important; margin-top: 0 !important; } */
+  body { padding-top: 15px !important; }
+
+  /* Just in case the header/nav itself has top spacing */
+  header, .navbar, .site-header { margin-top: 0 !important; padding-top: 0 !important; }
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"
+  <meta name="description" content="Can We Really Learn One Representation to Optimize All Rewards?">
+  <meta name="keywords" content="One-Step Forward-Backward Representation Learning">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <script type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+
+  <title>Can We Really Learn One Representation to Optimize All Rewards?</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  <style>
+    /* Tighter vertical rhythm */
+    .section.compact { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+    /* .hero.is-small .hero-body { padding-top: 1.25rem; padding-bottom: 1.25rem; } */
+
+    /* Reduce heading spacing inside sections */
+    /* .section.compact .title { margin-bottom: 1rem; } */
+    .section.compact .title.is-3 { margin-top: 0.1rem; }
+
+    /* Kill extra trailing space from last elements */
+    .section.compact .content > :last-child,
+    .section.compact .publication-image:last-child,
+    .section.compact .video-container:last-child { margin-bottom: 0; }
+    .publication-title { font-size: 3rem; font-weight: bold; }
+    .publication-authors { margin-top: 1rem; }
+    .author-block { display: inline-block; margin: 0 0.5rem; }
+    .publication-links { margin-top: 1.5rem; }
+    .link-block { margin: 0.25rem; }
+    .content.has-text-justified { text-align: justify; }
+    .publication-image { margin: 2rem 0; }
+    hr.rounded { border: 2px solid #e5e5e5; border-radius: 5px; margin: 3rem 0; }
+    .hidden { display: none; }
+    .toggle-link { color: #1f77b4; cursor: pointer; display: inline-block; margin-bottom: 1rem; }
+    .toggle-link:hover { color: #1f77b4; }
+    .table-image-container { margin: 1.5rem 0; }
+    .table-image-container img { width: 100%; height: auto; }
+    .charts-container { margin: 1.5rem 0; }
+    .charts-container img { width: 100%; height: auto; }
+    .caption-text { margin: 1rem 0; font-style: italic; }
+    .benefits-list { margin: 1rem 0 1rem 2rem; }
+    .benefits-list li { margin: 0.5rem 0; }
+    .task-selector { margin: 2rem 0; }
+    .task-selector .button { margin: 0.25rem; }
+    .video-container { margin: 1rem 0; }
+    .video-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; }
+    .video-wrapper { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .video-item { flex: 1; min-width: 250px; max-width: 2048px; }
+    .video-item video { width: 100%; height: auto; border-radius: 8px; }
+    .video-label { text-align: center; margin-top: 0.5rem; font-weight: bold; }
+
+    /* Grid that both the video and the caption agree on */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px; /* keep this the same for video and caption */
+    }
+
+    /* Make the video span the full width of the grid */
+    .video-grid > .video {
+      grid-column: 1 / -1;
+      width: 100%;
+      display: block;
+      border-radius: 8px; /* optional */
+    }
+
+    /* Caption uses the exact same 5-column track list */
+    .caption-grid {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      font-size: 0.95rem; /* optional */
+      line-height: 1.4;
+    }
+    .proposition-block {
+        background-color: #f0f7ff; /* Soft light blue background */
+        border-left: 6px solid #2d5a9e; /* Stronger blue accent bar */
+        border-radius: 4px;
+        padding: 24px;
+        margin: 30px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+    }
+
+    .proposition-header {
+        color: #2d5a9e;
+        font-weight: bold;
+        font-variant: small-caps;
+        font-size: 1.1em;
+        margin-bottom: 12px;
+        display: block;
+    }
+
+    .proposition-block ol {
+        margin-top: 15px;
+        padding-left: 25px;
+    }
+
+    .proposition-block li {
+        margin-bottom: 10px;
+    }
+
+    
+
+    /* Responsive: collapse columns on smaller screens */
+    @media (max-width: 1024px) {
+      .video-grid,
+      .caption-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 640px) {
+      .video-grid,
+      .caption-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Can We Really Learn One Representation to Optimize All Rewards?</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://chongyi-zheng.github.io/">Chongyi Zheng*</a><sup>1</sup>&emsp;
+            </span>
+            <span class="author-block">
+              <a href="">Royina Karegoudra Jayanth*</a><sup>1</sup>&emsp;
+            </span>
+            <span class="author-block">
+              <a href="https://ben-eysenbach.github.io/">Benjamin Eysenbach</a><sup>1</sup>&emsp;</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <sup>1</sup>Princeton University
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              (*Equal contribution)
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/xx" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+                <a href="https://github.com/chongyi-zheng/onestep-fb" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-code"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <div class="table-image-container" style="width:100%; text-align: center;">
+          <img src="../assets/papers/onestep_fb/images/onestep_fb.svg" alt="Teaser image" style="width: 90%; height: auto;">
+        </div>
+        
+        <h3 class="title is-3">Overview</h3>
+        <div class="content has-text-justified">
+          <p>
+            <i>How to leverage the right form of prior to pre-train large models for solving reinforcement learning (RL) problems?</i> One promising direction is to learn a prior over the policies of some yet-to-be-determined tasks: prefetch as much computation as possible before a specific reward function is known.
+          </p>
+          <p>
+            Recent work (<a href="https://arxiv.org/abs/2103.07945">forward-backward (FB) representation learning</a>) has tried this, arguing that an unsupervised representation learning procedure can enable optimal control over arbitrary rewards without further fine-tuning. Our work demystifies FB by clarifying when such representations can exist, what its objective optimizes, and how it converges in practice.
+          </p>
+          <p>
+            Our analysis suggests a simplified unsupervised pre-training method for RL that, instead of enabling optimal control, performs one step of policy improvement: <b>one-step forward-backward representation learning (one-step FB)</b>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">Theoretical Findings</h3>   
+        <div class="content has-text-justified">
+        
+        <div class="content has-text-justified">
+          <p>
+            We aim to answer the following questions in our theoretical analysis of FB:
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            <b>When do the ground-truth FB representations exist?</b> In discrete controlled Markov processes (CMPs), we find four necessary conditions for the existence of ground-truth FB representations:
+            <a href="#" class="toggle-link" id="toggleExistenceConditions">
+              Click to see the four necessary conditions.
+            </a>
+            <div id="existenceConditionsContainer" class="hidden">
+              <ol class="benefits-list">
+                <li>
+                  <i>representation dimension \( d \): \( d \geq \left| \mathcal{S} \times \mathcal{A} \right| \).</i> 
+                </li>
+                <li>
+                  <i>rank of the ground-truth forward representation matrix \( F_{\mathcal{Z}}^{\star} \): \( \left| \mathcal{S} \times \mathcal{A} \right| \leq \text{rank}(F_{\mathcal{Z}}^{\star}) \leq d \).</i>
+                </li>
+                <li>
+                  <i>rank of the ground-truth backward representation matrix \( B^{\star} \): \( \text{rank}(B^{\star}) = d \).</i>
+                </li>
+                <li>
+                  <i>relationship between the ground-truth forward-backward representation matrices and successor measures \( M^{\pi}({\color{gray} a} \mid {\color{gray} s}, z) \):
+                    $$
+                      B^{\star} = F^{\star +}_{z_1} M^{\pi({\color{gray} a} \mid {\color{gray} s}, z_1)} / \rho = \dots = F^{\star +}_{z_{|\mathcal{Z}|}} M^{\pi({\color{gray} a} \mid {\color{gray} s}, z_{|\mathcal{Z}|})} / \rho,
+                    $$
+                    where \( {\color{gray} X}^{+} \) denotes the pseudoinverse of the matrix \({\color{gray} X} \).
+                  </i>
+                </li>
+              </ol>
+            </div>
+          </p>
+
+          <p>
+            <b>What does the FB representation objective minimize?</b> We interpret the representation objective in FB as a temporal-difference (TD) variance of the least-squares importance fitting (LSIF) loss. This interpretation draws a connection with <a href="https://link.springer.com/chapter/10.1007/11564096_32">fitted Q-evaluation</a>. 
+          </p>
+
+          <p>
+            <b>Does the practical FB algorithm converge to ground-truth representations?</b> Our theory suggests that, in theory, whether the FB algorithm converges to any ground-truth representations remains an open problem. The key challenge comes from the circular dependency between the FB representations and the policies (see the figure above). In practice, we will use didactic experiments to demonstrate the failure convergence of FB.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">Our Simplified Algorithm</h3>
+
+        <div class="content has-text-justified">
+          <p>
+            Our understanding of FB suggests a simplified pre-training method for RL called one-step forward-backward (one-step FB) representation learning. 
+          </p>
+          <ul class="benefits-list">
+            <li>One-step FB breaks the circular dependency by learning representations for a <i>fixed</i> behavioral policy (see the figure above).</li>
+            <li>One-step FB performs policy adaptation via one step of policy improvement.</li>
+            <li>Starting from the existing FB algorithm, implmeneting our method requires making two simple changes.</li>
+          </ul>
+          
+          <a href="#" class="toggle-link" id="toggleAlgorithm">
+            Click to see the complete algorithm.
+          </a>
+          <div id="algorithmContainer" class="hidden">
+            <figure class="table-image-container">
+              <img src="../assets/papers/onestep_fb/images/onestep_fb_algo.jpeg" alt="One-step FB algorithm">
+            </figure>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">Didactic Experiments</h3> 
+        <div class="content has-text-justified">
+          <div class="content is-centered">
+            <div class="table-image-container" style="width:100%; text-align: center;">
+              <img src="../assets/papers/onestep_fb/images/3_state_cmp.svg" alt="3 State CMP" style="width: 40%; height: auto;">
+              <figcaption class="content has-text-justified" style="font-style: italic;">
+                <b>The three-state CMP.</b> Agents start from state \(s_0\) and take action \(a_i\) (\(i = 0, 1, 2\)) to determinstically transit into state \(s_i\). States \(s_1\) and \(s_2\) are both absorbing states.
+              </figcaption>
+            </div>
+
+            <div class="table-image-container" style="width:100%; text-align: center;">
+              <img src="../assets/papers/onestep_fb/images/3_state_cmp_lcs.svg" alt="3 State CMP Results" style="width: 120%; height: auto;">
+            </div>
+          
+            <p>
+              We will track several metrics in aims of answering the following questions:
+            </p>
+            <ol class="benefits-list">
+              <li><i>Do the learned representations accurately reflect the successor measure ratio?</i> \( M^{\pi} / \rho \) and \( M^{\pi_{\beta}} / \rho \) prediction errors.</li>
+              <li><i>Do the learned representations accurately reflect the ground-truth Q values?</i> \( Q^{\star} \) and \( Q^{\pi_{\beta}} \) prediction errors.</li>
+              <li><i>How similar are the learned policies to the ground-truth policies?</i> forward KL divergence (\( \pi^{\star} \)) and forward KL divergence (\( \text{argmax}_a Q^{\pi_{\beta}} \)).</li> </li>
+              <li><i>Do the predicted Q-value satisfy the equivariance property of universal value functions?</i> \( \hat{Q} \) equivariance errors.</li>
+            </ol>
+
+            <p>
+              Results:
+            </p>
+            <ul class="benefits-list">
+              <li><i>(Left)</i> After training for \( 10^{5} \) gradient steps, FB fails to converge to ground-truth FB representations.</li>
+              <li><i>(Right)</i> Given a fixed policy, one-step FB exactly fits the ground-truth one-step FB representations.</li>
+            </ul>
+
+            <a href="#" class="toggle-link" id="toggle5StateCMP">
+              Click to see didactic experiments on another CMP
+            </a>
+
+            <div id="5StateCMPContainer" class="hidden">
+              <div class="table-image-container" style="width:100%; text-align: center;">
+                <img src="../assets/papers/onestep_fb/images/5_state_cmp.svg" alt="5 State CMP" style="width: 50%; height: auto;">
+                <figcaption class="content has-text-justified" style="font-style: italic;">
+                  <b>The five-state circular CMP.</b> Agents start from state \(s_0\) and take action \(a_i\) (\(i = 0, 1, 2\)). At every state \(s_i\), choosing \(a_0\) deterministically transits to the next state \( s_{(i + 1) \mod 5} \), forming circular transitions. At every state \( s_i \), choosing action \( a_1 \) transits to state \( s_{(i - 1) \mod 5} \) with a proprobability \( 0.7 \) and stays in the same state with a probability of \( 0.3 \), forming the stochastic transitions.
+                </figcaption>
+              </div>
+
+              <div class="table-image-container" style="width:100%; text-align: center;">
+                <img src="../assets/papers/onestep_fb/images/5_state_cmp_lcs.svg" alt="5 State CMP Results" style="width: 120%; height: auto;">
+                <figcaption class="content has-text-justified" style="font-style: italic;">
+                  <b>(Left)</b> After training for \( 10^5 \) gradient steps, FB fails to converge to a pair of ground-truth FB representations. <b>(Right)</b> Given a fixed policy, one-step FB exactly fits the ground-truth one-step FB representations within \( 4 \times 10^4 \) gradient steps. These observations are consistent with our analysis on the three-state CMP.
+                </figcaption>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">Experiments on Standard Benchmarks</h3>
+        
+        <h4 class = "title is-4">Domains</h4>
+        <div style="display:flex; justify-content:center; gap:1rem; margin:1.5em 0;">
+          <figure class="table-image-container" style="margin:0; text-align:center; flex:1;">
+            <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
+              <source src="../assets/papers/onestep_fb/videos/walker.mp4" type="video/mp4">
+              Your browser doesn’t support the video tag.
+            </video>
+            <figcaption style="font-size:1.2rem; font-style: italic;">walker</figcaption>
+          </figure>
+          <figure class="table-image-container" style="margin:0; text-align:center; flex:1;">
+            <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
+              <source src="../assets/papers/onestep_fb/videos/cheetah.mp4" type="video/mp4">
+              Your browser doesn’t support the video tag.
+            </video>
+            <figcaption style="font-size:1.2rem; font-style: italic;">cheetah</figcaption>
+          </figure>
+          <figure class="table-image-container" style="margin:0; text-align:center; flex:1;">
+            <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
+              <source src="../assets/papers/onestep_fb/videos/quadruped.mp4" type="video/mp4">
+              Your browser doesn’t support the video tag.
+            </video>  
+            <figcaption style="font-size:1.2rem; font-style: italic;">quadruped</figcaption>
+          </figure>
+          <figure class="table-image-container" style="margin:0; text-align:center; flex:1;">
+            <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
+              <source src="../assets/papers/onestep_fb/videos/jaco.mp4" type="video/mp4">
+              Your browser doesn’t support the video tag.
+            </video>
+            <figcaption style="font-size:1.2rem; font-style: italic;">jaco</figcaption>
+          </figure>
+        </div>
+        <div style="display:flex; justify-content:center; gap:1rem; margin:1.5em 0;">
+          <figure class="table-image-container" style="margin:0; text-align:center; flex:1;">
+            <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
+              <source src="../assets/papers/onestep_fb/videos/antmaze-large-navigate-v0_data.mp4" type="video/mp4">
+              Your browser doesn’t support the video tag.
+            </video>
+            <figcaption style="font-size:1.2rem; font-style: italic;">antmaze large</figcaption>
+          </figure>
+          <figure class="table-image-container" style="margin:0; text-align:center; flex:1;">
+            <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
+              <source src="../assets/papers/onestep_fb/videos/antmaze-teleport-navigate-v0_data.mp4" type="video/mp4">
+              Your browser doesn’t support the video tag.
+            </video>
+            <figcaption style="font-size:1.2rem; font-style: italic;">antmaze teleport</figcaption>
+          </figure>
+          <figure class="table-image-container" style="margin:0; text-align:center; flex:1;">
+            <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
+              <source src="../assets/papers/onestep_fb/videos/cube-single-v0_task4.mp4" type="video/mp4">
+              Your browser doesn’t support the video tag.
+            </video>  
+            <figcaption style="font-size:1.2rem; font-style: italic;">cube single</figcaption>
+          </figure>
+          <figure class="table-image-container" style="margin:0; text-align:center; flex:1;">
+            <video autoplay loop muted playsinline style="width:100%; border-radius:4px;">
+              <source src="../assets/papers/onestep_fb/videos/scene-v0_task5.mp4" type="video/mp4">
+              Your browser doesn’t support the video tag.
+            </video>
+            <figcaption style="font-size:1.2rem; font-style: italic;">scene</figcaption>
+          </figure>
+        </div>
+
+
+        <h4 class="title is-4">Offline zero-shot RL</h4>
+        <div class="content has-text-justified">
+        
+        <a href="#" class="toggle-link" id="toggleTable">
+          Click to see the full table (<span id="taskCount">46</span> tasks)
+        </a>
+        
+        <div id="tableContainer" class="hidden">
+          <figure class="table-image-container">
+            <img src="../assets/papers/onestep_fb/images/zero_shot_rl_eval.png" alt="Offline zero-shot RL evaluation">
+          </figure>
+        </div>
+        <figure class="table-image-container">
+          <img src="../assets/papers/onestep_fb/images/zero_shot_rl_eval_agg.png" alt="Offline zero-shot RL evaluations aggregated across domains">
+          <!-- <figcaption class="content has-text-justified" style="font-style: italic;">
+            Offline zero-shot RL evaluation averaged over 8 seeds on 46 continous control tasks from ExORL and OGBench.
+          </figcaption> -->
+        </figure>
+
+        <p>
+          <ul class="benefits-list">
+            <li>One-step FB achieves the best or near-best performance on \( 6 \) out of \( 10 \) domains.</li>
+            <li>Compared with FB, one-step FB achieves \(+1.4 \times\) improvements on average.</li>
+            <li>One-step FB is able to outperform prior methods by \(20\%\) using RGB images directly.</li>
+          </ul>
+        </p>
+
+        <!-- <h4 class="title is-4">Offline-to-online fine-tuning</h4>
+        <div class="image-container" style="flex: 1; text-align: center;">
+            <img src="static/images/online_finetuning_fb.png" style="width: 80%;">
+            <p class="caption-text has-text-centered">
+              <b>Figure. </b> Fine-tuning pre-trained agents on downstream tasks. After offline pre-training, we conduct online fine-tuning on various methods using the same off-the-shelf RL algorithm (TD3).
+            </p>
+        </div> -->
+
+        <figure class="table-image-container">
+          <img src="../assets/papers/onestep_fb/images/finetuning_lcs.svg" alt="Offline-to-online fine-tuning learning curves">
+          <!-- <figcaption class="content has-text-justified" style="font-style: italic;">
+            Offline zero-shot RL evaluation averaged over 8 seeds on 46 continous control tasks from ExORL and OGBench.
+          </figcaption> -->
+        </figure>
+
+        <p>
+          <ul class="benefits-list">
+            <li>After offline unsupervised pre-training, we conduct online fine-tuning on various methods using the same off-the-shelf RL algorithm (TD3).</li>
+            <li>One-step FB continues to provide higher sample efficiency (\(+40\%\) on average) during fine-tuning, as compared with the original FB method.</li>
+            <li>The fine-tuned policies reach the asymptotic performance of TD3 at the end of training.</li>
+          </ul>
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">The Key Components of One-Step FB</h3>
+
+        <div class="table-image-container" style="width:100%; text-align: center;">
+          <img src="../assets/papers/onestep_fb/images/lambda_ortho_ablations.svg" alt="Orthonormalization regularization ablation" style="width: 100%; height: auto;">
+          <figcaption class="content has-text-justified" style="font-style: italic;">
+            Using an appropriate value of the orthonormalization regularization strength \( \lambda_{\text{ortho}} \) is key to the performance of one-step FB.
+          </figcaption>
+        </div>
+
+        <div class="table-image-container" style="width:100%; text-align: center;">
+          <img src="../assets/papers/onestep_fb/images/tau_reward_ablations.svg" alt="Reward temperature ablation" style="width: 100%; height: auto;">
+          <figcaption class="content has-text-justified" style="font-style: italic;">
+            During zero-shot adaptation, we reweight the reward function using a softmax weight with temperature \( \tau_{\text{reward}} \). One-step FB is less sensitive to the choice of \( \tau_{\text{reward}} \) on different domains.
+          </figcaption>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section compact" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h3 class="title is-3">BibTeX</h3>
+    <pre><code>@article{zheng2026can,
+  title={Can We Really Learn One Representation to Optimize All Rewards?}, 
+  author={Zheng, Chongyi and Jayanth, Royina Karegoudra and Eysenbach, Benjamin},
+  journal={arXiv preprint arXiv:xx},
+  year={2026},
+}</code></pre>
+  </div>
+</section>
+
+<script>
+  function changeTask(taskName, startVideo, midVideo, lastVideo) {
+    const title = document.getElementById('video-title');
+    const player1 = document.getElementById('task-video-player-1');
+    const player2 = document.getElementById('task-video-player-2');
+    const player3 = document.getElementById('task-video-player-3');
+    const item2 = document.getElementById('task-video-item-2');
+    
+    title.textContent = taskName.charAt(0).toUpperCase() + taskName.slice(1);
+    
+    player1.src = startVideo;
+    player1.load();
+    
+    if (midVideo) {
+      player2.src = midVideo;
+      player2.load();
+      item2.style.display = 'block';
+    } else {
+      item2.style.display = 'none';
+    }
+    
+    player3.src = lastVideo;
+    player3.load();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleExistenceConditionsLink = document.getElementById('toggleExistenceConditions');
+    const existenceConditionsContainer = document.getElementById('existenceConditionsContainer');
+    
+    if (toggleExistenceConditionsLink && existenceConditionsContainer) {
+      let isExpanded = false;
+
+      toggleExistenceConditionsLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        isExpanded = !isExpanded;
+        
+        if (isExpanded) {
+          existenceConditionsContainer.classList.remove('hidden');
+          toggleExistenceConditionsLink.innerHTML = 'Click to hide the four necessary conditions.';
+        } else {
+          existenceConditionsContainer.classList.add('hidden');
+          toggleExistenceConditionsLink.innerHTML = 'Click to see the four necessary conditions.';
+        }
+      });
+    }
+
+    const toggleAlgorithmLink = document.getElementById('toggleAlgorithm');
+    const algorithmContainer = document.getElementById('algorithmContainer');
+    
+    if (toggleAlgorithmLink && algorithmContainer) {
+      let isExpanded = false;
+
+      toggleAlgorithmLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        isExpanded = !isExpanded;
+        
+        if (isExpanded) {
+          algorithmContainer.classList.remove('hidden');
+          toggleAlgorithmLink.innerHTML = 'Click to hide the four necessary conditions.';
+        } else {
+          algorithmContainer.classList.add('hidden');
+          toggleAlgorithmLink.innerHTML = 'Click to see the four necessary conditions.';
+        }
+      });
+    }
+
+    const toggleFiveStateCMPLink = document.getElementById('toggle5StateCMP');
+    const fiveStateCMPContainer = document.getElementById('5StateCMPContainer');
+    
+    if (toggleFiveStateCMPLink && fiveStateCMPContainer) {
+      let isExpanded = false;
+
+      toggleFiveStateCMPLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        isExpanded = !isExpanded;
+        
+        if (isExpanded) {
+          fiveStateCMPContainer.classList.remove('hidden');
+          toggleFiveStateCMPLink.innerHTML = 'Click to hide didactic experiments on another CMP';
+        } else {
+          fiveStateCMPContainer.classList.add('hidden');
+          toggleFiveStateCMPLink.innerHTML = 'Click to see didactic experiments on another CMP';
+        }
+      });
+    }
+
+    const toggleLink = document.getElementById('toggleTable');
+    const tableContainer = document.getElementById('tableContainer');
+    
+    if (toggleLink && tableContainer) {
+      let isExpanded = false;
+
+      toggleLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        isExpanded = !isExpanded;
+        
+        if (isExpanded) {
+          tableContainer.classList.remove('hidden');
+          toggleLink.innerHTML = 'Click to hide the full table (<span id="taskCount">62</span> tasks)';
+        } else {
+          tableContainer.classList.add('hidden');
+          toggleLink.innerHTML = 'Click to see the full table (<span id="taskCount">62</span> tasks)';
+        }
+      });
+    }
+
+    const toggleLink2 = document.getElementById('toggleTable2');
+    const tableContainer2 = document.getElementById('tableContainer2');
+    
+    if (toggleLink2 && tableContainer2) {
+      let isExpanded2 = false;
+
+      toggleLink2.addEventListener('click', function(e) {
+        e.preventDefault();
+        isExpanded2 = !isExpanded2;
+        
+        if (isExpanded2) {
+          tableContainer2.classList.remove('hidden');
+          toggleLink2.innerHTML = 'Click to hide the full table (<span id="taskCount2">6</span> tasks)';
+        } else {
+          tableContainer2.classList.add('hidden');
+          toggleLink2.innerHTML = 'Click to see the full table (<span id="taskCount2">6</span> tasks)';
+        }
+      });
+    }
+
+
+    const toggleLink3 = document.getElementById('toggleTable3');
+    const tableContainer3 = document.getElementById('tableContainer3');
+    
+    if (toggleLink3 && tableContainer3) {
+      let isExpanded3 = false;
+
+      toggleLink3.addEventListener('click', function(e) {
+        e.preventDefault();
+        isExpanded3 = !isExpanded3;
+        
+        if (isExpanded3) {
+          tableContainer3.classList.remove('hidden');
+          toggleLink3.innerHTML = 'Click to hide the full table (<span id="taskCount3">6</span> tasks)';
+        } else {
+          tableContainer3.classList.add('hidden');
+          toggleLink3.innerHTML = 'Click to see the full table (<span id="taskCount3">6</span> tasks)';
+        }
+      });
+    }
+
+
+  });
+</script>
+</body>
+
+</html>

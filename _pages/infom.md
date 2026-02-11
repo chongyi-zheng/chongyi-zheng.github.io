@@ -190,10 +190,10 @@ Comparing InFOM to alternative policy extraction strategies based on the one-ste
 ### Citation
 
 ```bibtex
-@article{zheng2025intention,
-    title={Intention-Conditioned Flow Occupancy Models},
-    author={Chongyi Zheng and Seohong Park and Sergey Levine and Benjamin Eysenbach},
-    journal={arXiv preprint arXiv:2506.08902},
-    year={2025}
+@inproceedings{zheng2026intention,
+  title={Intention-Conditioned Flow Occupancy Models},
+  author={Zheng, Chongyi and Park, Seohong and Levine, Sergey and Eysenbach, Benjamin},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2026},
 }
 ```
