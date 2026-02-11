@@ -15,6 +15,28 @@ hide_title: true
 
   /* Just in case the header/nav itself has top spacing */
   header, .navbar, .site-header { margin-top: 0 !important; padding-top: 0 !important; }
+
+  /* --- Fix Paper/Code button colors (al-folio link styles can override Bulma) --- */
+  .publication-links a.button,
+  .publication-links a.button:visited {
+    background-color: #363636 !important;   /* Bulma is-dark */
+    border-color: #363636 !important;
+    color: #ffffff !important;              /* force text color */
+    text-decoration: none !important;
+  }
+
+  .publication-links a.button .icon,
+  .publication-links a.button .icon i,
+  .publication-links a.button span {
+    color: inherit !important;              /* icons + text follow button color */
+  }
+
+  .publication-links a.button:hover,
+  .publication-links a.button:focus {
+    background-color: #2b2b2b !important;   /* slightly darker on hover */
+    border-color: #2b2b2b !important;
+    color: #ffffff !important;
+  }
 </style>
 
 <!DOCTYPE html>
@@ -105,7 +127,6 @@ hide_title: true
         margin: 30px 0;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow for depth */
     }
-
     .proposition-header {
         color: #2d5a9e;
         font-weight: bold;
@@ -123,9 +144,7 @@ hide_title: true
     .proposition-block li {
         margin-bottom: 10px;
     }
-
     
-
     /* Responsive: collapse columns on smaller screens */
     @media (max-width: 1024px) {
       .video-grid,
@@ -224,41 +243,37 @@ hide_title: true
       <div class="column is-full-width">
         <h3 class="title is-3">Theoretical Findings</h3>   
         <div class="content has-text-justified">
-        
-        <div class="content has-text-justified">
           <p>
             We aim to answer the following questions in our theoretical analysis of FB:
           </p>
-        </div>
-
-        <div class="content has-text-justified">
           <p>
             <b>When do the ground-truth FB representations exist?</b> In discrete controlled Markov processes (CMPs), we find four necessary conditions for the existence of ground-truth FB representations:
             <a href="#" class="toggle-link" id="toggleExistenceConditions">
               Click to see the four necessary conditions.
             </a>
-            <div id="existenceConditionsContainer" class="hidden">
-              <ol class="benefits-list">
-                <li>
-                  <i>representation dimension \( d \): \( d \geq \left| \mathcal{S} \times \mathcal{A} \right| \).</i> 
-                </li>
-                <li>
-                  <i>rank of the ground-truth forward representation matrix \( F_{\mathcal{Z}}^{\star} \): \( \left| \mathcal{S} \times \mathcal{A} \right| \leq \text{rank}(F_{\mathcal{Z}}^{\star}) \leq d \).</i>
-                </li>
-                <li>
-                  <i>rank of the ground-truth backward representation matrix \( B^{\star} \): \( \text{rank}(B^{\star}) = d \).</i>
-                </li>
-                <li>
-                  <i>relationship between the ground-truth forward-backward representation matrices and successor measures \( M^{\pi}({\color{gray} a} \mid {\color{gray} s}, z) \):
-                    $$
-                      B^{\star} = F^{\star +}_{z_1} M^{\pi({\color{gray} a} \mid {\color{gray} s}, z_1)} / \rho = \dots = F^{\star +}_{z_{|\mathcal{Z}|}} M^{\pi({\color{gray} a} \mid {\color{gray} s}, z_{|\mathcal{Z}|})} / \rho,
-                    $$
-                    where \( {\color{gray} X}^{+} \) denotes the pseudoinverse of the matrix \({\color{gray} X} \).
-                  </i>
-                </li>
-              </ol>
-            </div>
           </p>
+
+          <div id="existenceConditionsContainer" class="hidden">
+            <ol class="benefits-list">
+              <li>
+                <i>representation dimension \( d \): \( d \geq \left| \mathcal{S} \times \mathcal{A} \right| \).</i> 
+              </li>
+              <li>
+                <i>rank of the ground-truth forward representation matrix \( F_{\mathcal{Z}}^{\star} \): \( \left| \mathcal{S} \times \mathcal{A} \right| \leq \text{rank}(F_{\mathcal{Z}}^{\star}) \leq d \).</i>
+              </li>
+              <li>
+                <i>rank of the ground-truth backward representation matrix \( B^{\star} \): \( \text{rank}(B^{\star}) = d \).</i>
+              </li>
+              <li>
+                <i>relationship between the ground-truth forward-backward representation matrices and successor measures \( M^{\pi}({\color{gray} a} \mid {\color{gray} s}, z) \):
+                  $$
+                    B^{\star} = F^{\star +}_{z_1} M^{\pi({\color{gray} a} \mid {\color{gray} s}, z_1)} / \rho = \dots = F^{\star +}_{z_{|\mathcal{Z}|}} M^{\pi({\color{gray} a} \mid {\color{gray} s}, z_{|\mathcal{Z}|})} / \rho,
+                  $$
+                  where \( {\color{gray} X}^{+} \) denotes the pseudoinverse of the matrix \({\color{gray} X} \).
+                </i>
+              </li>
+            </ol>
+          </div>
 
           <p>
             <b>What does the FB representation objective minimize?</b> We interpret the representation objective in FB as a temporal-difference (TD) variance of the least-squares importance fitting (LSIF) loss. This interpretation draws a connection with <a href="https://link.springer.com/chapter/10.1007/11564096_32">fitted Q-evaluation</a>. 
@@ -276,29 +291,27 @@ hide_title: true
 <section class="section compact">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
-      <div class="column is-full-width">
+      <div class="column is-full">
         <h3 class="title is-3">Our Simplified Algorithm</h3>
 
         <div class="content has-text-justified">
           <p>
-            Our understanding of FB suggests a simplified pre-training method for RL called one-step forward-backward (one-step FB) representation learning. 
+            Our understanding of FB suggests a simplified pre-training method for RL called one-step forward-backward (one-step FB) representation learning.
           </p>
+
           <ul class="benefits-list">
             <li>One-step FB breaks the circular dependency by learning representations for a <i>fixed</i> behavioral policy (see the figure above).</li>
             <li>One-step FB performs policy adaptation via one step of policy improvement.</li>
-            <li>Starting from the existing FB algorithm, implmeneting our method requires making two simple changes.</li>
+            <li>Starting from the existing FB algorithm, implementing our method requires making two simple changes.</li>
           </ul>
-          
-          <a href="#" class="toggle-link" id="toggleAlgorithm">
-            Click to see the complete algorithm.
-          </a>
+
+          <a href="#" class="toggle-link" id="toggleAlgorithm">Click to see the complete algorithm.</a>
           <div id="algorithmContainer" class="hidden">
             <figure class="table-image-container">
               <img src="../assets/papers/onestep_fb/images/onestep_fb_algo.jpeg" alt="One-step FB algorithm">
             </figure>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -434,57 +447,41 @@ hide_title: true
           </figure>
         </div>
 
-
         <h4 class="title is-4">Offline zero-shot RL</h4>
         <div class="content has-text-justified">
         
-        <a href="#" class="toggle-link" id="toggleTable">
-          Click to see the full table (<span id="taskCount">46</span> tasks)
-        </a>
-        
-        <div id="tableContainer" class="hidden">
+          <a href="#" class="toggle-link" id="toggleTable">
+            Click to see the full table (<span id="taskCount">46</span> tasks)
+          </a>
+          
+          <div id="tableContainer" class="hidden">
+            <figure class="table-image-container">
+              <img src="../assets/papers/onestep_fb/images/zero_shot_rl_eval.png" alt="Offline zero-shot RL evaluation">
+            </figure>
+          </div>
           <figure class="table-image-container">
-            <img src="../assets/papers/onestep_fb/images/zero_shot_rl_eval.png" alt="Offline zero-shot RL evaluation">
+            <img src="../assets/papers/onestep_fb/images/zero_shot_rl_eval_agg.png" alt="Offline zero-shot RL evaluations aggregated across domains">
           </figure>
-        </div>
-        <figure class="table-image-container">
-          <img src="../assets/papers/onestep_fb/images/zero_shot_rl_eval_agg.png" alt="Offline zero-shot RL evaluations aggregated across domains">
-          <!-- <figcaption class="content has-text-justified" style="font-style: italic;">
-            Offline zero-shot RL evaluation averaged over 8 seeds on 46 continous control tasks from ExORL and OGBench.
-          </figcaption> -->
-        </figure>
 
-        <p>
           <ul class="benefits-list">
             <li>One-step FB achieves the best or near-best performance on \( 6 \) out of \( 10 \) domains.</li>
             <li>Compared with FB, one-step FB achieves \(+1.4 \times\) improvements on average.</li>
             <li>One-step FB is able to outperform prior methods by \(20\%\) using RGB images directly.</li>
           </ul>
-        </p>
+        </div>
 
-        <!-- <h4 class="title is-4">Offline-to-online fine-tuning</h4>
-        <div class="image-container" style="flex: 1; text-align: center;">
-            <img src="static/images/online_finetuning_fb.png" style="width: 80%;">
-            <p class="caption-text has-text-centered">
-              <b>Figure. </b> Fine-tuning pre-trained agents on downstream tasks. After offline pre-training, we conduct online fine-tuning on various methods using the same off-the-shelf RL algorithm (TD3).
-            </p>
-        </div> -->
+        <h4 class="title is-4">Offline-to-online fine-tuning</h4>
+        <div class="content has-text-justified">
+          <figure class="table-image-container">
+            <img src="../assets/papers/onestep_fb/images/finetuning_lcs.svg" alt="Offline-to-online fine-tuning learning curves">
+          </figure>
 
-        <figure class="table-image-container">
-          <img src="../assets/papers/onestep_fb/images/finetuning_lcs.svg" alt="Offline-to-online fine-tuning learning curves">
-          <!-- <figcaption class="content has-text-justified" style="font-style: italic;">
-            Offline zero-shot RL evaluation averaged over 8 seeds on 46 continous control tasks from ExORL and OGBench.
-          </figcaption> -->
-        </figure>
-
-        <p>
           <ul class="benefits-list">
             <li>After offline unsupervised pre-training, we conduct online fine-tuning on various methods using the same off-the-shelf RL algorithm (TD3).</li>
             <li>One-step FB continues to provide higher sample efficiency (\(+40\%\) on average) during fine-tuning, as compared with the original FB method.</li>
             <li>The fine-tuned policies reach the asymptotic performance of TD3 at the end of training.</li>
           </ul>
-        </p>
-
+        </div>
       </div>
     </div>
   </div>
@@ -631,49 +628,6 @@ hide_title: true
         }
       });
     }
-
-    const toggleLink2 = document.getElementById('toggleTable2');
-    const tableContainer2 = document.getElementById('tableContainer2');
-    
-    if (toggleLink2 && tableContainer2) {
-      let isExpanded2 = false;
-
-      toggleLink2.addEventListener('click', function(e) {
-        e.preventDefault();
-        isExpanded2 = !isExpanded2;
-        
-        if (isExpanded2) {
-          tableContainer2.classList.remove('hidden');
-          toggleLink2.innerHTML = 'Click to hide the full table (<span id="taskCount2">6</span> tasks)';
-        } else {
-          tableContainer2.classList.add('hidden');
-          toggleLink2.innerHTML = 'Click to see the full table (<span id="taskCount2">6</span> tasks)';
-        }
-      });
-    }
-
-
-    const toggleLink3 = document.getElementById('toggleTable3');
-    const tableContainer3 = document.getElementById('tableContainer3');
-    
-    if (toggleLink3 && tableContainer3) {
-      let isExpanded3 = false;
-
-      toggleLink3.addEventListener('click', function(e) {
-        e.preventDefault();
-        isExpanded3 = !isExpanded3;
-        
-        if (isExpanded3) {
-          tableContainer3.classList.remove('hidden');
-          toggleLink3.innerHTML = 'Click to hide the full table (<span id="taskCount3">6</span> tasks)';
-        } else {
-          tableContainer3.classList.add('hidden');
-          toggleLink3.innerHTML = 'Click to see the full table (<span id="taskCount3">6</span> tasks)';
-        }
-      });
-    }
-
-
   });
 </script>
 </body>
