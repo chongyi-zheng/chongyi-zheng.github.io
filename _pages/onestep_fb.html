@@ -194,7 +194,7 @@ hide_title: true
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a href="https://arxiv.org/abs/xx" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://arxiv.org/abs/2602.11399" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fas fa-file-pdf"></i></span>
                   <span>Paper</span>
                 </a>
@@ -223,13 +223,13 @@ hide_title: true
         <h3 class="title is-3">Overview</h3>
         <div class="content has-text-justified">
           <p>
-            <i>How to leverage the right form of prior to pre-train large models for solving reinforcement learning (RL) problems?</i> One promising direction is to learn a prior over the policies of some yet-to-be-determined tasks: prefetch as much computation as possible before a specific reward function is known.
+            Modern machine learning has moved towards leveraging large models as priors for downstream tasks. For example, we have large language models (LLMs) in natural language processing and large-scale self-supervised representation learning in computer vision. <i>How to build large models as good priors for solving reinforcement learning (RL) problems?</i> One promising direction is to learn a prior over the policies of some yet-to-be-determined tasks: prefetch as much computation as possible before a specific reward function is known.
           </p>
           <p>
-            Recent work (<a href="https://arxiv.org/abs/2103.07945">forward-backward (FB) representation learning</a>) has tried this, arguing that an unsupervised representation learning procedure can enable optimal control over arbitrary rewards without further fine-tuning. Our work demystifies FB by clarifying when such representations can exist, what its objective optimizes, and how it converges in practice.
+            Recent work (<a href="https://arxiv.org/abs/2103.07945">forward-backward (FB) representation learning</a>) has tried this, arguing that an unsupervised representation learning procedure can enable optimal control over <i>arbitrary</i> rewards without further fine-tuning. Conceptually, this idea resembles the <a href="https://arxiv.org/pdf/2005.14165">in-context learning</a> in LLMs. However, this formulation results in a circular dependency between learned representations and policies (see the figure above), incurring optimization challenges. In this work, we first demystifies FB by clarifying when such representations can exist, what its objective optimizes, and how it converges in practice.
           </p>
           <p>
-            Our analysis suggests a simplified unsupervised pre-training method for RL that, instead of enabling optimal control, performs one step of policy improvement: <b>one-step forward-backward representation learning (one-step FB)</b>.
+            Our analysis suggests a simplified unsupervised pre-training method for RL that breaks the circular dependency (see the figure above): <b>one-step forward-backward representation learning (one-step FB)</b>. Instead of enabling optimal control, one-step FB performs one step of policy improvement.
           </p>
         </div>
       </div>
@@ -241,13 +241,13 @@ hide_title: true
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h3 class="title is-3">Theoretical Findings</h3>   
+        <h3 class="title is-3">Demystifying Forward-Backward Representation Learning</h3>   
         <div class="content has-text-justified">
           <p>
-            We aim to answer the following questions in our theoretical analysis of FB:
+            Forward-backward representation learning factorizes their successor measures into bilinear representations, and uses those representations to acquire new policies. <a href="https://arxiv.org/abs/2103.07945">Touati & Ollivier</a> implicitly <i>assumes</i> that, in discrete controlled Markov processes (CMPs; Markov decision processes without a reward function), a ground-truth (oracle) factorization exists and the practical FB algorithm can converge to it. We want to both theoretically and empirically understand whether these assumptions hold for FB. Therefore, we aim to answer the following questions in our analysis.
           </p>
           <p>
-            <b>When do the ground-truth FB representations exist?</b> In discrete controlled Markov processes (CMPs), we find four necessary conditions for the existence of ground-truth FB representations:
+            <b>When do the ground-truth FB representations exist?</b> In discrete CMPs, we find four necessary conditions for the existence of ground-truth FB representations:
             <a href="#" class="toggle-link" id="toggleExistenceConditions">
               Click to see the four necessary conditions.
             </a>
@@ -276,11 +276,15 @@ hide_title: true
           </div>
 
           <p>
-            <b>What does the FB representation objective minimize?</b> We interpret the representation objective in FB as a temporal-difference (TD) variant of the least-squares importance fitting (LSIF) loss. This interpretation draws a connection with <a href="https://link.springer.com/chapter/10.1007/11564096_32">fitted Q-evaluation</a>. 
+            <b>What does the FB representation objective minimize?</b> We interpret the representation objective in FB as a temporal-difference (TD) variant of the least-squares importance fitting (LSIF) loss, drawing a connection with <a href="https://link.springer.com/chapter/10.1007/11564096_32">fitted Q-evaluation</a> (FQE). FQE performs approximate value iteration, which (approximately) enjoys convergence guarantee. This connection motivate us to study whether FB admits a similar convergence in practice.
           </p>
 
           <p>
-            <b>Does the practical FB algorithm converge to ground-truth representations?</b> Our analysis suggests that, in theory, whether the FB algorithm converges to any ground-truth representations remains an open problem. The key challenge comes from the circular dependency between the FB representations and the policies (see the figure above). In practice, we will use didactic experiments to demonstrate the failure convergence of FB.
+            <b>Does the practical FB algorithm converge to ground-truth representations?</b> We define a new FB Bellman operator to answer this question. Unfortunately, the FB Bellman operator is <b>not</b> a \(\gamma\)-contraction, suggesting that the Banach fixed-point theorem fails to apply. 
+            
+            <p>
+              In theory, whether the FB algorithm converges to any ground-truth representations remains an open problem. The key challenge comes from the circular dependency between the FB representations and the policies. In practice, we will use didactic experiments to demonstrate the failure convergence of FB.
+            </p>
           </p>
         </div>
       </div>
@@ -292,17 +296,22 @@ hide_title: true
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full">
-        <h3 class="title is-3">Our Simplified Algorithm</h3>
+        <h3 class="title is-3">A Simplified Algorithm for Unsupervised Pre-training in RL</h3>
 
         <div class="content has-text-justified">
           <p>
-            Our understanding of FB suggests a simplified pre-training method for RL called one-step forward-backward (one-step FB) representation learning.
+            Our understanding of FB reveals that its inherent circular dependenceny incurs optimization challenges and unclear learning behaviors. To break the circular dependency, we proposes a simplified pre-training method for RL called one-step forward-backward (one-step FB) representation learning.
           </p>
 
           <ul class="benefits-list">
-            <li>One-step FB breaks the circular dependency by learning representations for a <i>fixed</i> behavioral policy (see the figure above).</li>
-            <li>One-step FB performs policy adaptation via one step of policy improvement.</li>
+            <li>Instead of learning FB representations for the current policy, one-step FB representations for a <i>fixed</i> behavioral policy \( \pi_{\beta} \).</li>
+            <li>Unlike FB, which argues to prefetch optimal controls for arbitrary reward functions, one-step FB performs policy adaptation via one step of policy improvement.</li>
+            <li>Empirically, we find that one-step FB enjoys clear convergence in didactic discrete CMPs and achieves comparable zero-shot performances against FB on standard offline RL benchmarks.</li>
             <li>Starting from the existing FB algorithm, implementing our method requires making two simple changes.</li>
+            <ol class="benefits-list">
+              <li>Remove the latent variable from the input of the forward representation.</li>
+              <li>In the representation loss, sample the next action from the dataset instead of the target policy.</li>
+            </ol>
           </ul>
 
           <a href="#" class="toggle-link" id="toggleAlgorithm">Click to see the complete algorithm.</a>
@@ -317,7 +326,7 @@ hide_title: true
   </div>
 </section>
 
-<section class="section compact">
+<!-- <section class="section compact">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
@@ -377,14 +386,14 @@ hide_title: true
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <section class="section compact">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h3 class="title is-3">Experiments on Standard Benchmarks</h3>
-        
+
         <h4 class = "title is-4">Domains</h4>
         <div style="display:flex; justify-content:center; gap:1rem; margin:1.5em 0;">
           <figure class="table-image-container" style="margin:0; text-align:center; flex:1;">
@@ -447,6 +456,15 @@ hide_title: true
           </figure>
         </div>
 
+        <div class="content has-text-justified">
+          We use domains from the standard offline RL benchmarks to compare the performance of one-step FB against \(5 \) prior unsupervised pre-training methods for RL.
+          <ul class="benefits-list">
+            <li>We select a set of \(4\) state-based domains from the <a href="https://arxiv.org/abs/2201.13425">ExORL</a> benchmark.</li>
+            <li>We also select a set of \( 6 \) state- and image-based domains from the <a href="https://arxiv.org/abs/2410.20092">OGBench</a> benchmark.</li>
+            <li>While pre-training a set of policies using each algorithm, we measure the performances of zero-shot policy adaptation to downstream tasks (\(16\) tasks from ExORL and \(30\) tasks from OGBench).</li>
+          </ul>
+        </div>
+
         <h4 class="title is-4">Offline zero-shot RL</h4>
         <div class="content has-text-justified">
         
@@ -477,7 +495,7 @@ hide_title: true
           </figure>
 
           <ul class="benefits-list">
-            <li>After offline unsupervised pre-training, we conduct online fine-tuning on various methods using the same off-the-shelf RL algorithm (TD3).</li>
+            <li>After offline unsupervised pre-training, we conduct online fine-tuning of the policies pre-trained by different methods using the same off-the-shelf RL algorithm (TD3).</li>
             <li>One-step FB continues to provide higher sample efficiency (\(+40\%\) on average) during fine-tuning, as compared with the original FB method.</li>
             <li>The fine-tuned policies reach the asymptotic performance of TD3 at the end of training.</li>
           </ul>
@@ -517,7 +535,7 @@ hide_title: true
     <pre><code>@article{zheng2026can,
   title={Can We Really Learn One Representation to Optimize All Rewards?}, 
   author={Zheng, Chongyi and Jayanth, Royina Karegoudra and Eysenbach, Benjamin},
-  journal={arXiv preprint arXiv:xx},
+  journal={arXiv preprint arXiv:2602.11399},
   year={2026},
 }</code></pre>
   </div>
@@ -621,10 +639,10 @@ hide_title: true
         
         if (isExpanded) {
           tableContainer.classList.remove('hidden');
-          toggleLink.innerHTML = 'Click to hide the full table (<span id="taskCount">62</span> tasks)';
+          toggleLink.innerHTML = 'Click to hide the full table (<span id="taskCount">46</span> tasks)';
         } else {
           tableContainer.classList.add('hidden');
-          toggleLink.innerHTML = 'Click to see the full table (<span id="taskCount">62</span> tasks)';
+          toggleLink.innerHTML = 'Click to see the full table (<span id="taskCount">46</span> tasks)';
         }
       });
     }
