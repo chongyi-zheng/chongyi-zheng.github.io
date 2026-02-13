@@ -42,7 +42,7 @@ hide_title: true
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8"
+  <meta charset="utf-8">
   <meta name="description" content="Can We Really Learn One Representation to Optimize All Rewards?">
   <meta name="keywords" content="One-Step Forward-Backward Representation Learning">
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
@@ -226,7 +226,7 @@ hide_title: true
             Modern machine learning has moved towards leveraging large models as priors for downstream tasks. For example, we have large language models (LLMs) in natural language processing and large-scale self-supervised representation learning in computer vision. <i>How to build large models as good priors for solving reinforcement learning (RL) problems?</i> One promising direction is to learn a prior over the policies of some yet-to-be-determined tasks: prefetch as much computation as possible before a specific reward function is known.
           </p>
           <p>
-            Recent work (<a href="https://arxiv.org/abs/2103.07945">forward-backward (FB) representation learning</a>) has tried this, arguing that an unsupervised representation learning procedure can enable optimal control over <i>arbitrary</i> rewards without further fine-tuning. Conceptually, this idea resembles the <a href="https://arxiv.org/pdf/2005.14165">in-context learning</a> in LLMs. However, this formulation results in a circular dependency between learned representations and policies (see the figure above), incurring optimization challenges. In this work, we first demystifies FB by clarifying when such representations can exist, what its objective optimizes, and how it converges in practice.
+            Recent work (<a href="https://arxiv.org/abs/2103.07945">forward-backward (FB) representation learning</a>) has tried this, arguing that an unsupervised representation learning procedure can enable optimal control over <i>arbitrary</i> rewards without further fine-tuning. Conceptually, this idea resembles the <a href="https://arxiv.org/pdf/2005.14165">in-context learning</a> in LLMs. However, this formulation results in a circular dependency between learned representations and policies (see the figure above), incurring optimization challenges. In this work, we first demystify FB by clarifying when such representations can exist, what its objective optimizes, and how it converges in practice.
           </p>
           <p>
             Our analysis suggests a simplified unsupervised pre-training method for RL that breaks the circular dependency (see the figure above): <b>one-step forward-backward representation learning (one-step FB)</b>. Instead of enabling optimal control, one-step FB performs one step of policy improvement.
@@ -244,7 +244,7 @@ hide_title: true
         <h3 class="title is-3">Demystifying Forward-Backward Representation Learning</h3>   
         <div class="content has-text-justified">
           <p>
-            Forward-backward representation learning factorizes their successor measures into bilinear representations, and uses those representations to acquire new policies. <a href="https://arxiv.org/abs/2103.07945">Touati & Ollivier</a> implicitly <i>assumes</i> that, in discrete controlled Markov processes (CMPs; Markov decision processes without a reward function), a ground-truth (oracle) factorization exists and the practical FB algorithm can converge to it. We want to both theoretically and empirically understand whether these assumptions hold for FB. Therefore, we aim to answer the following questions in our analysis.
+            Forward-backward representation learning factorizes successor measures of the current policies into bilinear representations, and uses those representations to acquire new policies. <a href="https://arxiv.org/abs/2103.07945">Touati & Ollivier</a> implicitly <i>assumes</i> that, in discrete controlled Markov processes (CMPs; Markov decision processes without a reward function), a ground-truth (oracle) factorization exists and the practical FB algorithm can converge to it. We want to both theoretically and empirically understand whether these assumptions hold for FB. Therefore, we aim to answer the following questions in our analysis.
           </p>
           <p>
             <b>When do the ground-truth FB representations exist?</b> In discrete CMPs, we find four necessary conditions for the existence of ground-truth FB representations:
@@ -276,7 +276,7 @@ hide_title: true
           </div>
 
           <p>
-            <b>What does the FB representation objective minimize?</b> We interpret the representation objective in FB as a temporal-difference (TD) variant of the least-squares importance fitting (LSIF) loss, drawing a connection with <a href="https://link.springer.com/chapter/10.1007/11564096_32">fitted Q-evaluation</a> (FQE). FQE performs approximate value iteration, which (approximately) enjoys convergence guarantee. This connection motivate us to study whether FB admits a similar convergence in practice.
+            <b>What does the FB representation objective minimize?</b> We interpret the representation objective in FB as a temporal-difference (TD) variant of the least-squares importance fitting (LSIF) loss, drawing a connection with <a href="https://link.springer.com/chapter/10.1007/11564096_32">fitted Q-evaluation</a> (FQE). FQE performs approximate value iteration, which (approximately) enjoys convergence guarantee. This connection motivates us to study whether FB admits a similar convergence in practice.
           </p>
 
           <p>
@@ -300,13 +300,13 @@ hide_title: true
 
         <div class="content has-text-justified">
           <p>
-            Our understanding of FB reveals that its inherent circular dependenceny incurs optimization challenges and unclear learning behaviors. To break the circular dependency, we proposes a simplified pre-training method for RL called one-step forward-backward (one-step FB) representation learning.
+            Our understanding of FB reveals that its inherent circular dependency incurs optimization challenges and unclear learning behaviors. To break the circular dependency, we propose a simplified pre-training method for RL called one-step forward-backward (one-step FB) representation learning.
           </p>
 
           <ul class="benefits-list">
-            <li>Instead of learning FB representations for the current policy, one-step FB representations for a <i>fixed</i> behavioral policy \( \pi_{\beta} \).</li>
+            <li>Instead of learning FB representations for the current policy, one-step FB learns representations for a <i>fixed</i> behavioral policy \( \pi_{\beta} \).</li>
             <li>Unlike FB, which argues to prefetch optimal controls for arbitrary reward functions, one-step FB performs policy adaptation via one step of policy improvement.</li>
-            <li>Empirically, we find that one-step FB enjoys clear convergence in didactic discrete CMPs and achieves comparable zero-shot performances against FB on standard offline RL benchmarks.</li>
+            <li>Empirically, we find that one-step FB enjoys clear convergence in didactic discrete CMPs and achieves comparable zero-shot performance against FB on standard offline RL benchmarks.</li>
             <li>Starting from the existing FB algorithm, implementing our method requires making two simple changes.</li>
             <ol class="benefits-list">
               <li>Remove the latent variable from the input of the forward representation.</li>
@@ -350,7 +350,7 @@ hide_title: true
             <ol class="benefits-list">
               <li><i>Do the learned representations accurately reflect the successor measure ratio?</i> \( M^{\pi} / \rho \) and \( M^{\pi_{\beta}} / \rho \) prediction errors.</li>
               <li><i>Do the learned representations accurately reflect the ground-truth Q values?</i> \( Q^{\star} \) and \( Q^{\pi_{\beta}} \) prediction errors.</li>
-              <li><i>How similar are the learned policies to the ground-truth policies?</i> forward KL divergence (\( \pi^{\star} \)) and forward KL divergence (\( \text{argmax}_a Q^{\pi_{\beta}} \)).</li> </li>
+              <li><i>How similar are the learned policies to the ground-truth policies?</i> forward KL divergence (\( \pi^{\star} \)) and forward KL divergence (\( \text{argmax}_a Q^{\pi_{\beta}} \)).</li>
               <li><i>Do the predicted Q-value satisfy the equivariance property of universal value functions?</i> \( \hat{Q} \) equivariance errors.</li>
             </ol>
 
@@ -370,7 +370,7 @@ hide_title: true
               <div class="table-image-container" style="width:100%; text-align: center;">
                 <img src="../assets/papers/onestep_fb/images/5_state_cmp.svg" alt="5 State CMP" style="width: 50%; height: auto;">
                 <figcaption class="content has-text-justified" style="font-style: italic;">
-                  <b>The five-state circular CMP.</b> Agents start from state \(s_0\) and take action \(a_i\) (\(i = 0, 1, 2\)). At every state \(s_i\), choosing \(a_0\) deterministically transits to the next state \( s_{(i + 1) \mod 5} \), forming circular transitions. At every state \( s_i \), choosing action \( a_1 \) transits to state \( s_{(i - 1) \mod 5} \) with a proprobability \( 0.7 \) and stays in the same state with a probability of \( 0.3 \), forming the stochastic transitions.
+                  <b>The five-state circular CMP.</b> Agents start from state \(s_0\) and take action \(a_i\) (\(i = 0, 1, 2\)). At every state \(s_i\), choosing \(a_0\) deterministically transits to the next state \( s_{(i + 1) \mod 5} \), forming circular transitions. At every state \( s_i \), choosing action \( a_1 \) transits to state \( s_{(i - 1) \mod 5} \) with a probability \( 0.7 \) and stays in the same state with a probability of \( 0.3 \), forming the stochastic transitions.
                 </figcaption>
               </div>
 
@@ -457,11 +457,11 @@ hide_title: true
         </div>
 
         <div class="content has-text-justified">
-          We use domains from the standard offline RL benchmarks to compare the performance of one-step FB against \(5 \) prior unsupervised pre-training methods for RL.
+          We use domains from the standard offline RL benchmarks to compare the performance of one-step FB against \(5\) prior unsupervised pre-training methods for RL.
           <ul class="benefits-list">
             <li>We select a set of \(4\) state-based domains from the <a href="https://arxiv.org/abs/2201.13425">ExORL</a> benchmark.</li>
             <li>We also select a set of \( 6 \) state- and image-based domains from the <a href="https://arxiv.org/abs/2410.20092">OGBench</a> benchmark.</li>
-            <li>While pre-training a set of policies using each algorithm, we measure the performances of zero-shot policy adaptation to downstream tasks (\(16\) tasks from ExORL and \(30\) tasks from OGBench).</li>
+            <li>While pre-training a set of policies using each algorithm, we measure the performance of zero-shot policy adaptation to downstream tasks (\(16\) tasks from ExORL and \(30\) tasks from OGBench).</li>
           </ul>
         </div>
 
@@ -599,10 +599,10 @@ hide_title: true
         
         if (isExpanded) {
           algorithmContainer.classList.remove('hidden');
-          toggleAlgorithmLink.innerHTML = 'Click to hide the four necessary conditions.';
+          toggleAlgorithmLink.innerHTML = 'Click to hide the complete algorithm.';
         } else {
           algorithmContainer.classList.add('hidden');
-          toggleAlgorithmLink.innerHTML = 'Click to see the four necessary conditions.';
+          toggleAlgorithmLink.innerHTML = 'Click to see the complete algorithm.';
         }
       });
     }
