@@ -280,7 +280,7 @@ hide_title: true
           </div>
 
           <p>
-            <b>What does the FB representation objective minimize?</b> We interpret the representation objective in FB as a temporal-difference (TD) variant of the least-squares importance fitting (LSIF) loss, drawing a connection with <a href="https://link.springer.com/chapter/10.1007/11564096_32">fitted Q-evaluation</a> (FQE). FQE performs approximate value iteration, which (approximately) enjoys convergence guarantee. This connection motivates us to study whether FB admits a similar convergence in practice.
+            <b>What does the FB representation objective minimize?</b> We interpret the representation objective in FB as a temporal-difference (TD) variant of the least-squares importance fitting (LSIF) loss, drawing a connection to <a href="https://link.springer.com/chapter/10.1007/11564096_32">fitted Q-evaluation</a> (FQE). FQE performs approximate value iteration, which (approximately) enjoys convergence guarantee. This connection motivates us to study whether FB admits a similar convergence in practice.
           </p>
 
           <p>
@@ -313,7 +313,7 @@ hide_title: true
             <li>Empirically, we find that one-step FB enjoys clear convergence in didactic discrete CMPs and achieves comparable zero-shot performance against FB on standard offline RL benchmarks.</li>
             <li>Starting from the existing FB algorithm, implementing our method requires making two simple changes.</li>
             <ol class="benefits-list">
-              <li>Remove the latent variable from the input of the forward representation.</li>
+              <li>Remove the latent variable from the input to the forward representation.</li>
               <li>In the representation loss, sample the next action from the dataset instead of the target policy.</li>
             </ol>
           </ul>
