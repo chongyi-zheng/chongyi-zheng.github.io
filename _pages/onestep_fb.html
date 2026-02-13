@@ -46,7 +46,7 @@ hide_title: true
   <meta name="description" content="Can We Really Learn One Representation to Optimize All Rewards?">
   <meta name="keywords" content="One-Step Forward-Backward Representation Learning">
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-  <script type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <title>Can We Really Learn One Representation to Optimize All Rewards?</title>
 
@@ -269,11 +269,11 @@ hide_title: true
                 <i>rank of the ground-truth backward representation matrix \( B^{\star} \): \( \text{rank}(B^{\star}) = d \).</i>
               </li>
               <li>
-                <i>relationship between the ground-truth forward-backward representation matrices and successor measures \( M^{\pi}({\color{gray} a} \mid {\color{gray} s}, z) \):
+                <i>relationship between the ground-truth forward-backward representation matrices and successor measures \( M^{\pi}( a \mid  s, z) \):
                   $$
-                    B^{\star} = F^{\star +}_{z_1} M^{\pi({\color{gray} a} \mid {\color{gray} s}, z_1)} / \rho = \dots = F^{\star +}_{z_{|\mathcal{Z}|}} M^{\pi({\color{gray} a} \mid {\color{gray} s}, z_{|\mathcal{Z}|})} / \rho,
+                    B^{\star} = F^{\star +}_{z_1} M^{\pi(a \mid s, z_1)} / \rho = \dots = F^{\star +}_{z_{|\mathcal{Z}|}} M^{\pi( a \mid s, z_{|\mathcal{Z}|})} / \rho,
                   $$
-                  where \( {\color{gray} X}^{+} \) denotes the pseudoinverse of the matrix \({\color{gray} X} \).
+                  where \(X^{+}\) denotes the pseudoinverse of the matrix \(X\).
                 </i>
               </li>
             </ol>
