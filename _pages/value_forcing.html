@@ -2378,7 +2378,7 @@ nav: false
           <div class="prose">
             <p>
               We consider two ways to instantiate offline RL algorithms using the value forcing losses. 
-              First, we can evaluate an explicit policy by learning its return distributions and then performing policy improvement: <strong class="algorithm-vf">VF (explicit method)</strong>. 
+              First, we can evaluate the return distribution of an explicit policy and then perform policy improvement: <strong class="algorithm-vf">VF (explicit method)</strong>. 
               Second, we can learn return distributions through an expectile-weighted flow matching objective without an explicit actor: <strong>IVF (implicit method)</strong>. 
               Both algorithms use <a href="#losses">Eq.&nbsp;(2)</a> to learn the Q-velocity but differ in how they learn the V-velocity.
             </p>
