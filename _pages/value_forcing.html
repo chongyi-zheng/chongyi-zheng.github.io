@@ -2327,7 +2327,6 @@ nav: false
               Each flow has a velocity network that moves noisy samples toward clean returns.
               The <strong>V-velocity</strong> learns from the Q-velocity at the current state.
               The <strong>Q-velocity</strong> learns from the V-velocity at the next state, using the flow Bellman equation at the <u>same noise level</u>.
-              We use Lemma 1 in the paper to derive the corresponding flow-matching losses.
             </p>
           </div>
 
@@ -2377,9 +2376,8 @@ nav: false
           </div>
           <div class="prose">
             <p>
-              We consider two ways to instantiate offline RL algorithms using the value forcing losses. 
-              First, we can evaluate the return distribution of an explicit policy and then perform policy improvement: <strong class="algorithm-vf">VF (explicit method)</strong>. 
-              Second, we can learn return distributions through an expectile-weighted flow matching objective without an explicit actor: <strong>IVF (implicit method)</strong>. 
+              We instantiate two offline RL algorithms: (1) evaluate the return distribution of an explicit policy and then perform policy improvement: <strong class="algorithm-vf">VF (explicit method)</strong>,
+              and (2) learn return distributions through an expectile-weighted objective without an explicit actor: <strong>IVF (implicit method)</strong>. 
               Both algorithms use <a href="#losses">Eq.&nbsp;(2)</a> to learn the Q-velocity but differ in how they learn the V-velocity.
             </p>
           </div>
