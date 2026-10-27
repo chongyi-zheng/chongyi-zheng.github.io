@@ -1926,6 +1926,7 @@ nav: false
       }
     }
   </style>
+  <link rel="stylesheet" href="../assets/papers/value_forcing/return_paths.css">
 </head>
 
 <body>
@@ -1975,7 +1976,7 @@ nav: false
   <main>
 
     <!-- ============================== TEASER (Figure 1) ============================== -->
-    <section class="teaser" aria-label="Overview figure">
+    <section class="teaser" id="teaser" aria-label="Overview figure">
       <figure class="teaser-figure">
         <a class="fig-link" href="../assets/papers/value_forcing/images/teaser.png">
           <img class="fig-img teaser-img" src="../assets/papers/value_forcing/images/teaser.png" width="2400" height="653" fetchpriority="high"
@@ -2013,10 +2014,12 @@ nav: false
           </p>
           <p class="key-question">How can we get richer learning signals from each transition?</p>
           <p>
-            One appealing recipe is <i>Distributional RL</i>, which learns the full range of possible returns and their probabilities.
-            This captures information that a scalar value misses and provides richer training targets. Another recipe is <i>Flow matching</i>, which learns these distributions by transforming Gaussian noise into return samples.
-            This creates an opportunity to enforce <strong>Bellman consistency at every noise level</strong>,
-            extracting more learning signals from the same data and learning a more <u>accurate</u> return distribution (see the rightmost figure above).
+            <strong>Distributional RL</strong> models the full return distribution and can provide richer learning signals when the whole
+            return distribution is used as the TD target. Recent work has begun to use <strong>Flow Matching</strong> to represent the return distribution. These methods map Gaussian noise to the return
+            distribution through an iterative denoising process, creating an opportunity to enforce <strong>Bellman consistency at every noise level</strong>
+            and extract more learning signals from the same data. Prior flow-based methods, however, supervise only some noise levels
+            or use incorrect targets, and can learn <u>inaccurate</u> return distributions that collapse toward a single value
+            (see the <a href="#teaser">rightmost figure above</a>).
           </p>
         </div>
 
@@ -2071,8 +2074,13 @@ nav: false
     <section class="section is-alt" id="missing">
       <div class="container is-max-desktop">
         <!-- <p class="kicker is-prior">What&rsquo;s missing</p> -->
-        <h2 class="section-heading is-tagline">Prior methods leave gaps in Bellman consistency</h2>
-        <p class="mb-5">The key difference is where each method enforces the Bellman equation along the flow path.</p>
+        <h2 class="section-heading is-tagline">Prior methods do not enforce correct Bellman consistency</h2>
+        <p class="mb-5">
+          A flow-based critic turns Gaussian noise into a return sample. 
+          Ideally, the Bellman equation should hold at <u>each</u> of the intermediate noise levels. 
+          Prior methods differ in where along the flow path they enforce this consistency, and each misses or misapplies it at 
+          some noise levels:
+        </p>
 
         <div class="failure-grid">
           <article class="failure-card">
@@ -2095,8 +2103,39 @@ nav: false
         <div class="prose">
           <p>
             In our experiments, these methods can predict inaccurate distributions that
-            <span class="prior-ink">concentrate near a single value</span> (see <a href="#return-estimation">Experiments</a>).
+            <span class="prior-ink">concentrate near a single value</span>:
             <!-- Below, we summarize the differences. -->
+          </p>
+        </div>
+
+        <div class="return-paths" id="return-paths" data-src="../assets/papers/value_forcing/ret_flow_paths/humanoidmaze_giant_interactive.json">
+          <div class="return-paths-controls" hidden>
+            <label class="return-paths-slider-label" for="return-path-tau">
+              <span>Noise level &tau;</span>
+              <output id="return-path-time" for="return-path-tau" aria-hidden="true">&tau; = 0.00</output>
+            </label>
+            <input id="return-path-tau" type="range" min="0" max="1" step="0.01" value="0" disabled>
+            <p class="return-paths-range-labels" aria-hidden="true"><span>0 &middot; Gaussian noise</span><span>0.5</span><span>1 &middot; Returns</span></p>
+            <div class="return-paths-actions">
+              <button class="return-paths-button is-primary" id="return-path-play" type="button" aria-label="Play return flow animation" disabled>Play</button>
+              <button class="return-paths-button" id="return-path-reset" type="button" aria-label="Reset return flow to noise level 0" disabled>Reset</button>
+            </div>
+          </div>
+          <p class="return-paths-status" role="status" hidden></p>
+          <div class="return-paths-fallback">
+            <img src="../assets/papers/value_forcing/images/humanoidmaze_giant_paths.png" width="1980" height="491" loading="lazy"
+                 alt="Return flow paths on humanoidmaze-giant. VF spreads Gaussian noise over a broad return distribution, while FlowCritic, Value Flows and PCBF predict narrower distributions. Gray shows observed returns.">
+          </div>
+          <div class="return-paths-grid" hidden></div>
+          <p class="return-paths-legend" hidden>
+            <span><span class="return-paths-key is-truth" aria-hidden="true"></span>Ground Truth</span>
+            <span><span class="return-paths-key is-vf" aria-hidden="true"></span>VF (Ours)</span>
+            <span><span class="return-paths-key is-flowcritic" aria-hidden="true"></span>FlowCritic</span>
+            <span><span class="return-paths-key is-valueflows" aria-hidden="true"></span>Value Flows</span>
+            <span><span class="return-paths-key is-pcbf" aria-hidden="true"></span>PCBF</span>
+          </p>
+          <p class="return-paths-caption">
+            See Fig. 7 in the paper for complete results.
           </p>
         </div>
 
@@ -2250,10 +2289,11 @@ nav: false
 
           <div class="prose">
             <p>
-              In fact, the flow Bellman operator admits Bellman consistency at all intermediate noise levels: we have <strong>a unique fixed point at every noise level</strong>. This follows from the contraction mapping theorem (<a class="citation-link" href="https://doi.org/10.4064/fm-3-1-133-181">Banach, 1922</a>) and the following remark:
+              In fact, the flow Bellman operator admits Bellman consistency at all intermediate noise levels: we have <strong>a unique fixed point at every noise level</strong>. 
+              <!-- This follows from the contraction mapping theorem (<a class="citation-link" href="https://doi.org/10.4064/fm-3-1-133-181">Banach, 1922</a>) and the following remark: -->
             </p>
           </div>
-          <div class="eq-box">
+          <!-- <div class="eq-box">
             <span class="eq-tag">Remark 1 (Contraction)</span>
             For every noise level \( \tau \in [0, 1] \) and a \(p \in [1, \infty) \), \( \mathcal{T}^{\pi}_\tau \) is a \( \gamma \)-contraction on two arbitrary return random variables \( Z_1 \) and \( Z_2 \):
             $$W_p^{\sup}\big(\mathcal{T}^\pi_\tau Z_1,\ \mathcal{T}^\pi_\tau Z_2\big) \le \gamma\, W_p^{\sup}(Z_1, Z_2),$$
@@ -2263,7 +2303,7 @@ nav: false
             <p>
               The flow Bellman equation provides a consistent bootstrapping target at every noise level. We next turn it into flow-matching losses for learning return velocities.
             </p>
-          </div>
+          </div> -->
 
         </article>
 
@@ -2567,8 +2607,16 @@ nav: false
             <div class="tab-panel" id="panel-ivf" role="tabpanel" aria-labelledby="tab-ivf" tabindex="0">
               <figure class="figure">
                 <a class="fig-link fig-frame" href="../assets/papers/value_forcing/images/return_estimation_implicit.png">
-                  <img class="fig-img" src="../assets/papers/value_forcing/images/return_estimation_implicit.png" width="2897" height="2280" loading="lazy"
-                       alt="IVF against Implicit C51, Implicit IQN and DIVL: IVF follows the ground-truth return histograms more closely and has a lower mean 1-Wasserstein distance than all three baselines in every domain.">
+                  <!-- Match VF's plot rows and column widths while retaining the original figure. -->
+                  <svg class="fig-img" xmlns="http://www.w3.org/2000/svg" width="2897" height="2280" viewBox="0 0 2897 2280" role="img" aria-labelledby="ivf-return-estimation-title" focusable="false">
+                    <title id="ivf-return-estimation-title">IVF against Implicit C51, Implicit IQN and DIVL: IVF follows the ground-truth return histograms more closely and has a lower mean 1-Wasserstein distance than all three baselines in every domain.</title>
+                    <svg x="0" y="0" width="1813" height="2280" viewBox="0 69.4 1706 2140.69" preserveAspectRatio="none" overflow="hidden" aria-hidden="true">
+                      <image href="../assets/papers/value_forcing/images/return_estimation_implicit.png" width="2897" height="2280"/>
+                    </svg>
+                    <svg x="1813" y="0" width="1084" height="2280" viewBox="1706 69.4 1191 2140.69" preserveAspectRatio="none" overflow="hidden" aria-hidden="true">
+                      <image href="../assets/papers/value_forcing/images/return_estimation_implicit.png" width="2897" height="2280"/>
+                    </svg>
+                  </svg>
                 </a>
                 <figcaption class="fig-caption">
                   <strong>IVF learns more accurate return distributions than implicit distributional RL baselines.</strong>
@@ -2586,7 +2634,7 @@ nav: false
         <div class="result-block" id="offline-rl">
           <h3 class="result-title">Value Forcing outperforms prior offline RL methods on smaller datasets</h3>
           <p class="mb-5">
-            We compare against prior explicit and implicit value-learning methods in offline RL setting, experimenting with subsets of OGBench and OCBench datasets.
+            We compare against prior explicit and implicit value-learning methods in an offline RL setting, experimenting with subsets of OGBench and OCBench datasets.
           </p>
 
           <figure class="figure breakout">
@@ -2600,7 +2648,7 @@ nav: false
             <figcaption class="fig-caption">
               <strong>Value Forcing improves offline RL performance across dataset sizes.</strong>
               On OGBench, VF and IVF outperform their explicit and implicit baselines with 10% and 25% of the data and remain competitive with more data.
-              On OCBench, VF outperforms selective explicit methods at both dataset sizes, while IVF leads among selective implicit methods on the full dataset.
+              On OCBench, VF outperforms selected explicit methods at both dataset sizes, while IVF leads among selected implicit methods on the full dataset.
               Hatched bars <span aria-hidden="true">(<span class="hatch-swatch"></span>)</span> indicate distributional RL methods without flow matching.
             </figcaption>
           </figure>
@@ -3251,6 +3299,7 @@ nav: false
       });
     }());
   </script>
+  <script defer src="../assets/papers/value_forcing/return_paths.js"></script>
 </body>
 </html>
 {% endraw %}
