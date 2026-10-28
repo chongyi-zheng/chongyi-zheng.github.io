@@ -2643,7 +2643,7 @@ nav: false
             </div>
             <p class="scroll-hint" aria-hidden="true"><i class="fas fa-arrows-left-right"></i> Swipe to see the full figure</p>
             <figcaption class="fig-caption">
-              <strong>Value Forcing improves offline RL performance across dataset sizes.</strong>
+              <strong>Value Forcing improves offline RL performance across dataset sizes.</strong> Success rates are averaged over 20 OGBench tasks <em>(Left)</em> and 6 OCBench tasks <em>(Right)</em> on each dataset size.
               On OGBench, VF and IVF outperform their explicit and implicit baselines with 10% and 25% of the data and remain competitive with more data.
               On OCBench, VF outperforms selected explicit methods on the 25% dataset, while IVF leads among selected implicit methods on the full dataset.
               Hatched bars <span aria-hidden="true">(<span class="hatch-swatch"></span>)</span> indicate distributional RL methods without flow matching.
@@ -2693,7 +2693,7 @@ nav: false
                       <th scope="col" class="grp-start">DIVL</th>
                       <th scope="col">Implicit C51</th>
                       <th scope="col">Implicit IQN</th>
-                      <th scope="col">BFN</th>
+                      <th scope="col">Implicit QC</th>
                       <th scope="col" class="col-ours">IVF (Ours)</th>
                     </tr>
                   </thead>
@@ -2739,7 +2739,7 @@ nav: false
                       <th scope="col">QC</th>
                       <th scope="col" class="col-ours">VF (Ours)</th>
                       <th scope="col" class="grp-start">Implicit C51</th>
-                      <th scope="col">BFN</th>
+                      <th scope="col">Implicit QC</th>
                       <th scope="col" class="col-ours">IVF (Ours)</th>
                     </tr>
                   </thead>
@@ -2751,14 +2751,15 @@ nav: false
           </details>
         </div>
 
-        <!-- Policy extraction, expectile weighting, and reward scaling figures -->
+        <!-- Experiment 3: key design decisions (Figs. 4-5) -->
         <div class="result-block" id="ablations">
+          <h3 class="result-title">Key design decisions in Value Forcing</h3>
           <div class="study-grid breakout">
             <article class="study">
               <h4>Policy extraction and expectile weighting</h4>
               <figure class="figure">
                 <a class="fig-link fig-frame" href="../assets/papers/value_forcing/images/ablation_instantiations.png">
-                  <img class="fig-img" src="../assets/papers/value_forcing/images/ablation_instantiations.png" width="2000" height="793" loading="lazy"
+                  <img class="fig-img" src="../assets/papers/value_forcing/images/ablation_instantiations.png" width="2000" height="794" loading="lazy"
                        alt="Figure 4. Success rates of alternative instantiations. Explicit methods: learning both v_Q and v_V (VF) and learning only v_Q perform similarly, while a one-step actor is much lower. Implicit methods: Q, V expectile weighting (IVF) is much higher than v_Q, v_V expectile or quantile weights.">
                 </a>
                 <figcaption class="fig-caption">
@@ -2772,8 +2773,8 @@ nav: false
               <h4>Reward scaling</h4>
               <figure class="figure">
                 <a class="fig-link fig-frame" href="../assets/papers/value_forcing/images/ablation_reward_scaling.png">
-                  <img class="fig-img" src="../assets/papers/value_forcing/images/ablation_reward_scaling.png" width="2000" height="793" loading="lazy"
-                       alt="Figure 5. Success rates with and without reward scaling: about 86% versus 11% for VF, and 72% versus 11% for IVF.">
+                  <img class="fig-img" src="../assets/papers/value_forcing/images/ablation_reward_scaling.png" width="2000" height="794" loading="lazy"
+                       alt="Figure 5. Success rates with and without reward scaling: about 86% versus 11% for VF, and 76% versus 11% for IVF.">
                 </a>
                 <figcaption class="fig-caption">
                   Both VF and IVF achieve substantially higher success rates with reward scaling.
