@@ -1953,8 +1953,7 @@ nav: false
         </div>
 
         <nav class="publication-links" aria-label="Paper resources">
-          <!-- TODO(links): set href to the paper (arXiv) URL -->
-          <a class="button is-dark is-rounded" href="#">
+          <a class="button is-dark is-rounded" href="https://arxiv.org/abs/2611.02160">
             <span class="icon"><i class="fas fa-file-pdf" aria-hidden="true"></i></span>
             <span>Paper</span>
           </a>
@@ -1993,7 +1992,7 @@ nav: false
           <p>
             <strong>Value Forcing</strong> learns return distributions with flow matching.
             It enforces <strong>Bellman consistency at every noise level</strong> to learn more accurate return distributions.
-            Across <strong>26 offline RL tasks</strong>, Value Forcing improves policy performance, with the largest gains when data is limited.
+            Across <strong>26 offline RL tasks</strong>, Value Forcing improves policy performance, with particularly large gains when data is limited.
           </p>
         </div>
       </div>
@@ -2078,7 +2077,7 @@ nav: false
           A flow-based critic turns Gaussian noise into a return sample. 
           Ideally, the Bellman equation should hold at <u>each</u> of the intermediate noise levels. 
           Prior methods differ in where along the flow path they enforce this consistency, and each misses or misapplies it at 
-          some noise levels, resulting in sparser supervision.
+          some noise levels, resulting in sparse or incorrect supervision.
         </p>
 
         <div class="failure-grid">
@@ -2095,13 +2094,13 @@ nav: false
           <article class="failure-card">
             <h3>Noise-sampled<br>supervision</h3>
             <p class="failure-methods"><a class="citation-link" href="https://arxiv.org/abs/2605.08253">PCBF</a></p>
-            <p>Pairs flow paths with the same initial noise, rather than enforcing Bellman consistency for individual flow paths.</p>
+            <p>Pairs flow paths with the same initial noise, rather than enforcing each intermediate marginal distribution to satisfy a Bellman equation.</p>
           </article>
         </div>
 
         <div class="prose">
           <p>
-            In our experiments, these methods can predict inaccurate distributions that
+            In our experiments, FlowCritic, Value Flows, and PCBF can predict inaccurate distributions that
             <span class="prior-ink">concentrate near a single value</span>:
             <!-- Below, we summarize the differences. -->
           </p>
@@ -2397,7 +2396,7 @@ nav: false
               <p class="algo-type algorithm-ivf">Implicit value learning</p>
               <h4><strong class="algorithm-ivf">IVF</strong></h4>
               <p>
-                Following <a class="citation-link" href="https://arxiv.org/abs/2110.06169">Kostrikov et al. (2022)</a>, we define the expectile weight with coefficient \(\mu \in [0.5,1)\) as:
+                Following prior work (e.g., Sec. 10.3.1 of <a class="citation-link" href="https://doi.org/10.1007/978-3-662-63882-8_2">Fahrmeir et al. (2022)</a>), we define the expectile weight with coefficient \(\mu \in [0.5,1)\) as:
               </p>
               $$\begin{aligned}
                 w^\mu(s,a) &\triangleq \mu\,\mathbf{1}\big(Q(s,a) \ge V(s)\big) + (1-\mu)\,\mathbf{1}\big(Q(s,a) < V(s)\big),
@@ -2406,6 +2405,7 @@ nav: false
               $$\begin{aligned}
                 \mathcal{L}^\mu(v_V) &= \mathbb{E}_{\textcolor{#2f8a4f}{\boldsymbol{a \sim D}}}\Big[w^\mu(s,a) \cdot \left( v_V(z^\tau \mid s,\tau) - v_Q(z^\tau \mid s,a,\tau) \right)^2 \Big].
               \end{aligned}$$
+              <p>This loss extends the scalar expectile regression loss (<a class="citation-link" href="https://arxiv.org/abs/2110.06169">Kostrikov et al., 2022</a>) to return flows.</p>
             </div>
           </div>
 
@@ -2434,21 +2434,21 @@ nav: false
                     </li>
                     <li><span class="algorithm-statement"><strong>for each training iteration do</strong></span></li>
                     <li class="algorithm-nested">
-                      <span class="algorithm-statement">\((s,a,r,s') \sim \mathcal{D},\ \tau \sim \mathrm{Unif}([0,1])\).</span>
+                      <span class="algorithm-statement">\((s,a,r,s') \sim D,\ \tau \sim \mathrm{Unif}([0,1])\).</span>
                     </li>
                     <li class="algorithm-nested algorithm-vf">
                       <span class="algorithm-statement">\(a_\pi \sim\) rejection sampling, \(z^\tau \sim p_Q^{\bar\psi}(z^\tau \mid s,a_\pi,\tau)\).</span>
                     </li>
                     <li class="algorithm-nested algorithm-vf">
                       <span class="algorithm-statement">\(\Delta\theta \leftarrow \nabla_\theta \mathcal{L}(v_V^\theta)\).</span>
-                      <span class="algorithm-comment">Learn velocity for VF</span>
+                      <span class="algorithm-comment">Learn V-velocity for VF</span>
                     </li>
                     <li class="algorithm-nested algorithm-ivf">
                       <span class="algorithm-statement">Compute \(w^\mu(s,a)\) using the expectile weights, \(z^\tau \sim p_Q^{\bar\psi}(z^\tau \mid s,a,\tau)\).</span>
                     </li>
                     <li class="algorithm-nested algorithm-ivf">
                       <span class="algorithm-statement">\(\Delta\theta \leftarrow \nabla_\theta \mathcal{L}^\mu(v_V^\theta)\).</span>
-                      <span class="algorithm-comment">Learn velocity for IVF</span>
+                      <span class="algorithm-comment">Learn V-velocity for IVF</span>
                     </li>
                     <li class="algorithm-nested">
                       <span class="algorithm-statement">\(z^\tau \sim p_V^\theta(z^\tau \mid s',\tau),\ \epsilon \sim \mathcal{N}(0,1)\).</span>
@@ -2544,28 +2544,28 @@ nav: false
                 <video class="benchmark-video" loop muted playsinline preload="none" width="512" height="512"
                        poster="../assets/papers/value_forcing/videos/ocbench-block-single.jpg"
                        src="../assets/papers/value_forcing/videos/ocbench-block-single.mp4"
-                       aria-label="OCBench block-single: move a block to its target, shown at 3 times speed">
-                  <a href="../assets/papers/value_forcing/videos/ocbench-block-single.mp4">Watch the block-single video</a>.
+                       aria-label="OCBench block-lite-single: move a block to its target, shown at 3 times speed">
+                  <a href="../assets/papers/value_forcing/videos/ocbench-block-single.mp4">Watch the block-lite-single video</a>.
                 </video>
-                <figcaption>block-single</figcaption>
+                <figcaption>block-lite-single</figcaption>
               </figure>
               <figure class="benchmark-card">
                 <video class="benchmark-video" loop muted playsinline preload="none" width="512" height="512"
                        poster="../assets/papers/value_forcing/videos/ocbench-block-double.jpg"
                        src="../assets/papers/value_forcing/videos/ocbench-block-double.mp4"
-                       aria-label="OCBench block-double: stack two blocks, shown at 3 times speed">
-                  <a href="../assets/papers/value_forcing/videos/ocbench-block-double.mp4">Watch the block-double video</a>.
+                       aria-label="OCBench block-lite-double: stack two blocks, shown at 3 times speed">
+                  <a href="../assets/papers/value_forcing/videos/ocbench-block-double.mp4">Watch the block-lite-double video</a>.
                 </video>
-                <figcaption>block-double</figcaption>
+                <figcaption>block-lite-double</figcaption>
               </figure>
               <figure class="benchmark-card">
                 <video class="benchmark-video" loop muted playsinline preload="none" width="512" height="512"
                        poster="../assets/papers/value_forcing/videos/ocbench-chamber-easy.jpg"
                        src="../assets/papers/value_forcing/videos/ocbench-chamber-easy.mp4"
-                       aria-label="OCBench chamber-easy: take blocks out of the drawer, shown at 3 times speed">
-                  <a href="../assets/papers/value_forcing/videos/ocbench-chamber-easy.mp4">Watch the chamber-easy video</a>.
+                       aria-label="OCBench chamber-lite-easy: take blocks out of the drawer, shown at 3 times speed">
+                  <a href="../assets/papers/value_forcing/videos/ocbench-chamber-easy.mp4">Watch the chamber-lite-easy video</a>.
                 </video>
-                <figcaption>chamber-easy</figcaption>
+                <figcaption>chamber-lite-easy</figcaption>
               </figure>
             </div>
           </div>
@@ -2593,7 +2593,8 @@ nav: false
                 </a>
                 <figcaption class="fig-caption">
                   <strong>VF learns more accurate return distributions than prior flow-based return estimators.</strong>
-                  <em>(Left)</em> VF captures the ground-truth return distributions more accurately, while prior methods are biased and collapse their predictions into narrow peaks.
+                  <em>(Left)</em> We collect datasets to conduct policy evaluation experiments at a single state from each of the four OGBench domains.
+                  <em>(Center)</em> VF captures the ground-truth return distributions more accurately, while prior methods are biased and collapse their predictions into narrow peaks.
                   <em>(Right)</em> VF achieves lower mean 1-Wasserstein distances than all three prior methods in all tasks.
                   <span class="tap-hint">Tap to enlarge.</span>
                 </figcaption>
@@ -2763,7 +2764,7 @@ nav: false
                        alt="Figure 4. Success rates of alternative instantiations. Explicit methods: learning both v_Q and v_V (VF) and learning only v_Q perform similarly, while a one-step actor is much lower. Implicit methods: Q, V expectile weighting (IVF) is much higher than v_Q, v_V expectile or quantile weights.">
                 </a>
                 <figcaption class="fig-caption">
-                  For VF, learning a separate V-velocity is optional, but replacing rejection sampling with a one-step actor
+                  For VF, the results suggest that learning a separate V-velocity is optional, but replacing rejection sampling with a one-step actor
                   reduces success rates. For IVF, expectile weights based on scalar advantages clearly outperform
                   expectile regression on velocities or quantile-based weights.
                 </figcaption>
@@ -2799,12 +2800,12 @@ nav: false
               <i class="far fa-copy" aria-hidden="true"></i><span class="copy-label">Copy</span>
             </button>
           </div>
-          <!-- TODO(bibtex): add the arXiv number once the paper is public -->
           <pre class="bibtex-code"><code id="bibtex-text">@article{zheng2026value,
   title={Value Forcing: Aligning Return Distributions at All Noise Levels},
   author={Zheng, Chongyi and Zhou, Zhiyuan and Li, Qiyang and Eysenbach, Benjamin and Levine, Sergey},
-  journal={arXiv preprint arXiv:TODO},
+  journal={arXiv preprint arXiv:2611.02160},
   year={2026},
+  url={https://arxiv.org/abs/2611.02160},
 }</code></pre>
         </div>
         <p class="sr-only" id="copy-status" aria-live="polite"></p>
@@ -3075,7 +3076,7 @@ nav: false
           ["humanoidmaze-giant-task4", "0±0", "0±0", "0±0", "0±0", "0±0", "0±0", "0±0", "0±0", "3±5", "50±14", "43±5", "35±21", "63±13*"],
           ["humanoidmaze-giant-task5", "0±0", "0±0", "0±0", "3±5", "20±40", "55±30*", "0±0", "0±0", "0±0", "88±19", "75±6", "93±10*", "83±5"],
           ["Domain average", "0±0", "0±0", "0±0", "1±1", "4±8", "18±4*", "0±0", "0±0", "10±3", "46±5", "40±3", "43±5", "49±7*"],
-          ["Overall average", "19±3", "32±2", "46±4", "23±2", "51±5*", "50±5", "45±3", "53±2*", "15±2", "58±2", "57±2", "51±4", "66±3*"]
+          ["Overall average", "19±3", "32±2", "46±4", "23±2", "51±5*", "50±6", "45±3", "53±2*", "15±2", "58±2", "57±2", "51±4", "66±3*"]
         ],
         "100%": [
           ["cube-triple-task1", "8±5", "95±6*", "95±6*", "40±27", "100±0*", "100±0*", "98±5*", "98±5*", "3±5", "98±5*", "100±0*", "95±6*", "100±0*"],
@@ -3108,13 +3109,13 @@ nav: false
       /* OCBench rows from Tables 3 (25%) and 5 (100%); untested methods are omitted. */
       var OCBENCH_RESULTS = {
         "25%": [
-          ["block-lite-single-task1", "96±1*", "92±1*", "94±1*", "91±2", "88±9*", "92±1*", "92±3*"],
-          ["block-lite-double-task1", "42±5", "37±9", "39±23", "45±6*", "26±15", "46±7*", "48±6*"],
-          ["block-lite-double-task2", "46±6", "40±8", "33±18", "51±12*", "28±7", "44±15*", "38±6"],
-          ["chamber-lite-easy-task1", "89±0*", "84±3", "76±7", "86±3*", "84±3*", "82±3*", "84±2*"],
-          ["chamber-lite-easy-task2", "45±5", "51±6", "20±7", "63±3*", "42±3*", "40±5", "43±7*"],
-          ["chamber-lite-easy-task3", "56±4", "44±8", "8±3", "64±1*", "35±3", "38±8", "42±8*"],
-          ["Overall average", "62±2", "58±3", "45±5", "67±2*", "51±3", "57±3*", "58±2*"]
+          ["block-lite-single-task1", "94±3*", "92±1*", "94±1*", "91±2*", "88±9*", "92±1*", "92±3*"],
+          ["block-lite-double-task1", "41±4", "37±9", "39±23", "45±6*", "26±15", "46±7*", "48±6*"],
+          ["block-lite-double-task2", "42±9", "40±8", "33±18", "51±12*", "28±7", "44±15*", "38±6"],
+          ["chamber-lite-easy-task1", "85±7*", "84±3*", "76±7", "86±3*", "84±3*", "82±3*", "84±2*"],
+          ["chamber-lite-easy-task2", "48±8", "51±6", "20±7", "63±3*", "42±3*", "40±5", "43±7*"],
+          ["chamber-lite-easy-task3", "47±11", "44±8", "8±3", "64±1*", "35±3", "38±8", "42±8*"],
+          ["Overall average", "60±3", "58±3", "45±5", "67±2*", "51±3", "57±3*", "58±2*"]
         ],
         "100%": [
           ["block-lite-single-task1", "89±10*", "86±10", "89±1*", "91±3*", "85±7", "87±5*", "90±5*"],
